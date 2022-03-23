@@ -1,0 +1,25 @@
+<div *ngFor = "let barber of barbers">
+    <mat-card class="example-card">
+        <mat-card-header>
+          <div mat-card-avatar class="example-header-image">{{barber.id}}</div>
+          <mat-card-title>{{barber.firstName}}</mat-card-title>
+          <mat-card-subtitle>{{barber.lastName}}</mat-card-subtitle>
+        </mat-card-header>
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <p>
+            id: {{barber.id}}
+          </p>
+          <p>
+            age: {{barber.age}}
+          </p>
+          <p>
+            salonId: {{barber.salonId}}
+          </p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button mat-button>LIKE</button>
+          <button mat-button>SHARE</button>
+        </mat-card-actions>
+      </mat-card>
+</div>

@@ -1,0 +1,100 @@
+<div class="salons-main-container">
+  <div class="sorting-filtering-container">
+    <div class="salon-filters">
+      <mat-accordion>
+        <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              City
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          <mat-selection-list #cities>
+            <mat-list-option *ngFor="let city of salonsCities" (click)="handleSelectedCity(city)">
+              {{city}}
+              <div class="blabla">
+                <mat-divider></mat-divider>
+              </div>
+            </mat-list-option>
+          </mat-selection-list>
+        </mat-expansion-panel>
+      </mat-accordion>
+    </div>
+  </div>
+
+  <div class="salons-container">
+    <div class="salons-container-content">
+      <div class="search-bar">
+        <mat-form-field appearance="outline">
+          <mat-label>Sort by</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let option of sortingOptions" [value]="option" (click)="sortSalons(option)">
+              {{option}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field class="example-form-field" appearance="outline" style="padding-bottom: none !important">
+          <mat-label style="color:gray">Search</mat-label>
+          <input matInput type="text" [(ngModel)]="value" (ngModelChange)="searchSalon()">
+          <!-- <button *ngIf="value" matSuffix mat-icon-button aria-label="Clear" (click)="searchSalon()">
+            <mat-icon>search</mat-icon>
+          </button> -->
+        </mat-form-field>
+      </div>
+      <div class="filters-applied" *ngIf="selectedCities.length > 0">
+        <div class="filters-aplied-title">
+          Filters:
+        </div>
+        <div class="filter-chips">
+          <mat-chip-list aria-label="City selection"> 
+            <mat-chip *ngFor="let city of selectedCities">
+              {{city}}
+            </mat-chip>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div class="salon-content">
+
+        <ng-container *ngIf="isSearch === true; else salonsTemplate">
+          <div class="salon-for" *ngFor="let salon of searchedSalons">
+            <div class="salon-address" routerLink="detail/{{salon.id}}">
+              <div class="salon-image">
+                <img class="example-header-image" src={{salon.image}} style="width:200px; height:200px">
+              </div>
+              <div class="address">
+                <div class="salon-rating">
+                  <div class="rating">
+                    {{salon.rating}}
+                  </div>
+                </div>
+                <div class="address-city">
+                  {{salon.address.city}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+        <ng-template #salonsTemplate>
+          <div class="salon-for" *ngFor="let salon of salons">
+            <div class="salon-address" routerLink="detail/{{salon.id}}">
+              <div class="salon-image">
+                <img class="example-header-image" src={{salon.image}} style="width:200px; height:200px">
+              </div>
+              <div class="address">
+                <div class="salon-rating">
+                  <div class="rating">
+                    {{salon.rating}}
+                  </div>
+                </div>
+                <div class="address-city">
+                  {{salon.address.city}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </ng-template>
+
+      </div>
+    </div>
+  </div>
+</div>

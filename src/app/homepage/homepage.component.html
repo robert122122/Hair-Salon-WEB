@@ -1,0 +1,53 @@
+<div class="homepage-container">
+  <ngb-carousel *ngIf="images">
+    <ng-template ngbSlide *ngFor="let image of images">
+      <div class="picsum-img-wrapper"
+        style="background-image:linear-gradient(rgba(0, 0, 0, 0.427),rgba(0, 0, 0, 0.4)), url({{image}});background-size:cover;background-position:center;width:100%; height:800px;">
+      </div>
+    </ng-template>
+  </ngb-carousel>
+  <div class="main-caption-container">
+    <div class="main-caption">
+      <div class="caption-title">
+        How to:
+      </div>
+      <div class="caption-steps-content">
+        <div class="caption-step-one">
+          <div class="caption-icon">
+            <mat-icon>location_on</mat-icon>
+          </div>
+          <div class="caption-description">
+            Select salon from your city
+          </div>
+        </div>
+        <div class="caption-step-two">
+          <div class="caption-icon">
+            <mat-icon>content_cut</mat-icon>
+          </div>
+          <div class="caption-description">
+            Choose the service you need
+          </div>
+        </div>
+        <div class="caption-step-three">
+          <div class="caption-icon">
+            <mat-icon>account_circle</mat-icon>
+          </div>
+          <div class="caption-description">
+            Pick your favorite barber
+          </div>
+        </div>
+        <div class="caption-step-four">
+          <div class="caption-icon">
+            <mat-icon>date_range</mat-icon>
+          </div>
+          <div class="caption-description">
+            Select one of the available date
+          </div>
+        </div>
+      </div>
+      <div class="caption-button">
+        <button mat-raised-button class="schedule-button" routerLink="/salons">Schedule a haircut!</button>
+      </div>
+    </div>
+  </div>
+</div>

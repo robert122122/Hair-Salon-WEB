@@ -1,0 +1,146 @@
+.homepage-container {
+  position: relative;
+  top: -100px;
+  width: 100%;
+  height: 700px;
+}
+
+.main-caption-container{
+    position: absolute;
+    display:flex;
+    top:0;
+    margin-left: 15%;
+    margin-right: 15%;
+    width: 70%;
+    height: 100%;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.main-caption {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  margin-top: 150px;
+  height: 400px;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(2px);
+  border-radius: 10%;
+}
+
+.caption-steps-content {
+  height: 70%;
+  width: 100%;
+}
+
+.caption-title {
+  display: flex;
+  font-size: 30px;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 100%;
+  height: 15%;
+}
+
+.caption-step-one {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.caption-step-one:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+}
+
+.caption-step-two {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.caption-step-two:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+}
+
+.caption-step-three {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.caption-step-three:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+}
+
+.caption-step-four {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+  height: 25%;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.caption-step-four:hover {
+  transform: scale(1.2);
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 20px;
+}
+
+.caption-icon {
+  color: var(--main-color);
+  padding-right: 0.5rem;
+  display: flex;
+  align-items: center;
+}
+
+.caption-description {
+  color: rgb(189, 189, 189);
+  text-align: center;
+}
+
+.caption-button {
+  display: flex;
+  justify-content: center;
+  height: 15%;
+  align-items: center;
+}
+
+.schedule-button {
+  color: white;
+  background-color: var(--main-color);
+  border-radius: 25px;
+  height: 35px;
+}
+
+.schedule-button:hover {
+  color: white;
+  background-color: rgba(0, 0, 0, 0);
+  outline: 2px solid var(--main-color);
+}
+
+@media screen and (max-width: 769px) {
+    .main-caption-container{
+        justify-content: center;
+    }
+}
