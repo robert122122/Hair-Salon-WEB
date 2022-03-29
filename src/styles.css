@@ -3,23 +3,45 @@
 
 :root {
   --main-color: #febb02;
+  --complementary: #0245fe;
 }
 
-html, body { height: 100%; }
-body { 
-    margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
-    background-color: #F4F4F4;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-::-webkit-scrollbar{
-    width: 5px;
-  }
-  
-  ::-webkit-scrollbar-track{
-    background: white;
-  }
-  
-  ::-webkit-scrollbar-thumb{
-    background-image: linear-gradient(#ffdf00, rgba(171, 166, 166, 0.687));
-    border-radius:25px;
-  }
+html {
+  height: 100%;
+  font-size: 16px;
+  font-family: 'Times New Roman', Times, serif;
+}
+
+body {
+  width: 100%; 
+  min-height: 100vh;
+}
+
+/* html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: #f4f4f4;
+} */
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: white;
+}
+
+::-webkit-scrollbar-thumb {
+  background-image: linear-gradient(#ffdf00, rgba(171, 166, 166, 0.687));
+  border-radius: 25px;
+}

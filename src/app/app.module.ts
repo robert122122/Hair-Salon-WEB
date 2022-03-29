@@ -6,9 +6,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 @NgModule({
   declarations: [
     AppComponent,
+    ScrollToTopComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,11 +1,18 @@
 <div class="homepage-container">
-  <ngb-carousel *ngIf="images">
-    <ng-template ngbSlide *ngFor="let image of images">
-      <div class="picsum-img-wrapper"
-        style="background-image:linear-gradient(rgba(0, 0, 0, 0.427),rgba(0, 0, 0, 0.4)), url({{image}});background-size:cover;background-position:center;width:100%; height:800px;">
-      </div>
-    </ng-template>
-  </ngb-carousel>
+  <div class="carousel-container">
+    <ngb-carousel class="carousel-content" *ngIf="images">
+      <ng-template class="carousel-slide" ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper" style="  background-image: linear-gradient(
+            to bottom,
+            rgba(0, 0, 0, 0.427),
+            rgba(0, 0, 0, 0.227),
+            rgba(0, 0, 0, 0.2)
+          ),
+          url({{image}});">
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
   <div class="main-caption-container">
     <div class="main-caption">
       <div class="caption-title">

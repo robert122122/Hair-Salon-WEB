@@ -1,36 +1,71 @@
 .homepage-container {
-  position: relative;
-  top: -100px;
+  position: absolute;
+  top: 0;
   width: 100%;
-  height: 700px;
+  height: 100%;
 }
 
-.main-caption-container{
-    position: absolute;
-    display:flex;
-    top:0;
-    margin-left: 15%;
-    margin-right: 15%;
-    width: 70%;
-    height: 100%;
-    align-items: center;
-    justify-content: flex-end;
+.carousel-container {
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-content{
+  height: 100%;
+  width: 100%;
+}
+
+:host /deep/ .carousel-inner {
+  height: 100%;
+}
+
+:host /deep/ .carousel-item {
+  height: 100%;
+}
+
+.picsum-img-wrapper {
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-slide{
+  width: 100%;
+  height: 100%;
+}
+
+.main-caption-container {
+  position: absolute;
+  display: flex;
+  top: 0;
+  margin-left: 15%;
+  margin-right: 15%;
+  width: 70%;
+  height: 100%;
+  align-items: center;
+  justify-content: flex-end;
 }
 
 .main-caption {
   display: flex;
   flex-direction: column;
   width: 350px;
-  margin-top: 150px;
-  height: 400px;
+  margin-top: 50px;
+  height: 450px;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(2px);
+  backdrop-filter: blur(4px);
   border-radius: 10%;
 }
 
 .caption-steps-content {
   height: 70%;
   width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .caption-title {
@@ -46,9 +81,9 @@
 .caption-step-one {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 25%;
+  height: 23%;
   align-items: center;
   transition: 0.5s;
 }
@@ -62,9 +97,9 @@
 .caption-step-two {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 25%;
+  height: 23%;
   align-items: center;
   transition: 0.5s;
 }
@@ -78,9 +113,9 @@
 .caption-step-three {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 25%;
+  height: 23%;
   align-items: center;
   transition: 0.5s;
 }
@@ -94,9 +129,9 @@
 .caption-step-four {
   display: flex;
   flex-direction: row;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
-  height: 25%;
+  height: 23%;
   align-items: center;
   transition: 0.5s;
 }
@@ -109,9 +144,16 @@
 
 .caption-icon {
   color: var(--main-color);
-  padding-right: 0.5rem;
+  margin-left: 40px;
+  padding-right: 1rem;
   display: flex;
   align-items: center;
+}
+
+.mat-icon {
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
 }
 
 .caption-description {
@@ -122,6 +164,7 @@
 .caption-button {
   display: flex;
   justify-content: center;
+  margin-bottom: 0.3rem;
   height: 15%;
   align-items: center;
 }
@@ -140,7 +183,20 @@
 }
 
 @media screen and (max-width: 769px) {
-    .main-caption-container{
-        justify-content: center;
-    }
+  .main-caption-container {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .caption-icon {
+    margin-left: 15px;
+    padding-right: 0.5rem;
+  }
+
+  .mat-icon {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+  }
 }

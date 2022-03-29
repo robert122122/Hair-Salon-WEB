@@ -42,6 +42,10 @@ export class SalonsComponent implements OnInit {
     });
   }
 
+  navigate(salon: any): any {
+    window.location.href = "https://www.google.com/maps/place/Strada+"+salon.address.street+"+"+salon.address.number+","+salon.address.city+",";
+  }
+
   searchSalon(): any {
     this.searchedSalons = [];
     this.salons.map((salon: any) => {
