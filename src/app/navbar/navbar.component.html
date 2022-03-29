@@ -1,4 +1,4 @@
-<mat-toolbar class="navbar-toolbar">
+<mat-toolbar class="navbar-toolbar" [ngClass]="{'show-navbar-toolbar': windowScrolled}">
   <div class="navbar-toolbar-content">
     <mat-icon style="color:black">content_cut</mat-icon>
     <span class="navbar-title" routerLink="/">Hair Appointments</span>
