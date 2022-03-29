@@ -2,8 +2,8 @@
   <div class="navbar-toolbar-content">
     <mat-icon style="color:black">content_cut</mat-icon>
     <span class="navbar-title" routerLink="/">Hair Appointments</span>
-    <nav class="navbar-content">
-      <a class="navbar-item" routerLink="/salons">Salons</a>
+    <nav class="navbar-content" [ngClass]="{'scrolled-navbar-item': windowScrolled}">
+      <a class="navbar-item" routerLink="/salons" >Salons</a>
       <a class="navbar-item" routerLink="/salons">My Account</a>
     </nav>
     <div class="mobile-navbar-content">
