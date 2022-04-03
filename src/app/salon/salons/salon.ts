@@ -6,6 +6,8 @@ export interface Salon {
     image:string,
     address:Address,
     rating: any,
+    description: string,
+    logo: string
 }
 
 export interface Address {

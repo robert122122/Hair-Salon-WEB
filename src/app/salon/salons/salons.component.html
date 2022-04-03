@@ -92,8 +92,7 @@
                       {{salon.rating}}
                     </div>
                   </div>
-                  <div class="salon-address"
-                    routerLink="https://www.google.ro/maps?q=palas+iasi&sxsrf=APq-WBsTryMuBj7BlB-K3wiV-cexhyySTA:1648130102520&uact=5&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzIFCAAQywEyBQgAEIAEMgUIABCABDIFCAAQywEyBQgAEIAEMgUIABCABDIFCAAQywEyBQgAEIAEMgsILhDHARCvARDLATIFCAAQywE6BwgAEEcQsAM6BwgAELADEEM6EgguEMcBEK8BEMgDELADEEMYAToMCC4QyAMQsAMQQxgBOg8ILhDUAhDIAxCwAxBDGAE6CggAEIAEEIcCEBQ6DQguEMcBEK8BEAoQywE6BwgAEAoQywFKBAhBGABKBAhGGAFQwRZYrhpgnRtoAnABeACAAXyIAZ0EkgEDMi4zmAEAoAEByAETwAEB2gEGCAEQARgI&um=1&ie=UTF-8&sa=X&ved=2ahUKEwjnz4KN8972AhUH_qQKHQLRB8UQ_AUoAnoECAIQBA">
+                  <div class="salon-address" (click)="navigate(salon)">
                     <mat-icon class="address-icon"> pin_drop</mat-icon>
                     <div class="address-content">
                       Street {{salon.address.street}} {{salon.address.number}}, {{salon.address.city}}

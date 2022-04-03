@@ -3,6 +3,17 @@ import { ActivatedRoute } from '@angular/router';
 import { Salon } from '../salons/salon';
 import { SalonService } from '../salon.service';
 import { Service } from '../service';
+import { Review } from './review';
+import { FormBuilder, Validators } from '@angular/forms';
+import { map, Observable } from 'rxjs';
+import { StepperOrientation } from '@angular/cdk/stepper';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Barber } from '../barber';
+
+export interface serviceTime{
+  hour: number,
+  minute: number
+}
 
 @Component({
   selector: 'app-salon-details',
@@ -25,16 +36,62 @@ export class SalonDetailsComponent implements OnInit {
       number: 0,
     },
     rating: 0,
+    description: "",
+    logo: ""
   };
 
-  images = ["https://images.squarespace-cdn.com/content/v1/5edee990a8696a7b8618fe6d/1592794368345-KP26O2DQ6O0SR8N0KOTN/DomMiguelPhotography6164+copy.jpg?format=2500w", "https://images.unsplash.com/photo-1560066984-138dadb4c035?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8aGFpciUyMHNhbG9ufGVufDB8fDB8fA%3D%3D&w=1000&q=80", "https://www.klaviyo.com/wp-content/uploads/2020/05/Image-from-iOS-2.jpg"];
+  minDate:Date = new Date();
+  maxDate:Date = new Date();
 
-  services: Service [] = [];
+  availableTimes: serviceTime[] = [
+    {hour: 9, minute: 0},
+    {hour: 9, minute: 30},
+    {hour: 10, minute: 0},
+    {hour: 10, minute: 30},
+    {hour: 11, minute: 0},
+    {hour: 12, minute: 30},
+    {hour: 12, minute: 0},
+    {hour: 13, minute: 30},
+    {hour: 13, minute: 0},
+    {hour: 14, minute: 30},
+    {hour: 14, minute: 0},
+    {hour: 15, minute: 30},
+    {hour: 15, minute: 0},
+    {hour: 16, minute: 30},
+    {hour: 16, minute: 0},
+  ];
+
+  menuItems: string[] = ['Appointment', 'Services', 'Barbers', 'About Us', 'Reviews'];
+
+  reviews: Review[] = [];
+
+  services: Service[] = [];
+
+  barbers: Barber[] = [];
+
+  firstFormGroup = this._formBuilder.group({
+    firstCtrl: ['', Validators.required],
+  });
+  secondFormGroup = this._formBuilder.group({
+    secondCtrl: ['', Validators.required],
+  });
+  thirdFormGroup = this._formBuilder.group({
+    thirdCtrl: ['', Validators.required],
+  });
+  stepperOrientation: Observable<StepperOrientation>;
+
+  selected: Date | null = null;
 
   constructor(
     private route: ActivatedRoute,
     private salonService: SalonService,
-  ) { }
+    private _formBuilder: FormBuilder,
+    breakpointObserver: BreakpointObserver
+  ) {
+    this.stepperOrientation = breakpointObserver
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
 
   ngOnInit(): void {
 
@@ -42,13 +99,28 @@ export class SalonDetailsComponent implements OnInit {
 
     this.salonService.getSalon(id).subscribe((salon: Salon) => {
       this.salon = salon;
-      console.log(salon);
     })
+
+    this.maxDate.setDate(this.maxDate.getDate() + 2 * 7);
 
     this.salonService.getServicesBySalon(id).subscribe((services: Service[]) => {
       this.services = services;
-      console.log(services);
     })
+
+    this.salonService.getReviewsBySalon(id).subscribe((reviews: Review[]) => {
+      this.reviews = reviews;
+    })
+
+    this.salonService.getBarbersBySalon(id).subscribe((barbers: Barber[]) => {
+      this.barbers = barbers;
+    })
+
+  }
+
+  setTimeToDate(timeToSet: serviceTime): any {
+    this.selected?.setHours(timeToSet.hour);
+    this.selected?.setMinutes(timeToSet.minute);
+    console.log(this.selected);
   }
 
 }

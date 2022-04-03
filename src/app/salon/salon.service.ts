@@ -1,6 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
+import { Barber } from './barber';
+import { Review } from './salon-details/review';
 import { Salon } from './salons/salon';
 import { Service } from './service';
 
@@ -20,6 +22,15 @@ export class SalonService {
   }
 
   getServicesBySalon(salonId: number): Observable<Service[]>{
-    return this.httpService.get<Service[]>(`https://localhost:44396/api/Service/Salon/${salonId}`)
+    return this.httpService.get<Service[]>(`https://localhost:44396/api/Service/Salon/${salonId}`);
   }
+
+  getReviewsBySalon(salonId: number): Observable<Review[]>{
+    return this.httpService.get<Review[]>(`https://localhost:44396/api/Review/Salon/${salonId}`);
+  }
+
+  getBarbersBySalon(salonId: number): Observable<Barber[]>{
+    return this.httpService.get<Barber[]>(`https://localhost:44396/api/Barber/Salon/${salonId}`);
+  }
+
 }
