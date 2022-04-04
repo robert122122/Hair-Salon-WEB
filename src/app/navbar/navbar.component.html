@@ -4,7 +4,7 @@
     <span class="navbar-title" routerLink="/">Hair Appointments</span>
     <nav class="navbar-content" [ngClass]="{'scrolled-navbar-item': windowScrolled}">
       <a class="navbar-item" routerLink="/salons" >Salons</a>
-      <a class="navbar-item" routerLink="/salons">My Account</a>
+      <a class="navbar-item" routerLink="/login">My Account</a>
     </nav>
     <div class="mobile-navbar-content">
       <div class="navbar-hamburger">
@@ -21,7 +21,7 @@
     [fixedInViewport]="mobileQuery.matches" fixedTopGap="100">
     <mat-nav-list class="sidenav-items">
       <a class="sidenav-dashboard" routerLink="/salons">Salons</a>
-      <a class="sidenav-dashboard" routerLink="/salons">My Account</a>
+      <a class="sidenav-dashboard" routerLink="/login">My Account</a>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>

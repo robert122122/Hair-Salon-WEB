@@ -1,26 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HomepageComponent } from './homepage.component';
-import { HomepageRoutingModule } from './homepage-routing.module';
+
+import { LoginRoutingModule } from './login-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialExampleModule } from 'src/material.module';
 import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LoginComponent } from './login.component';
+
 
 
 @NgModule({
   declarations: [
-    HomepageComponent,
+    LoginComponent
   ],
   imports: [
-    CommonModule, 
-    HomepageRoutingModule,
+    CommonModule,
+    LoginRoutingModule,
     FormsModule,
     MaterialExampleModule,
     HttpClientModule,
     ReactiveFormsModule,
     NgbModule
-  ],
-
+  ]
 })
-export class HomepageModule { }
+export class LoginModule { }

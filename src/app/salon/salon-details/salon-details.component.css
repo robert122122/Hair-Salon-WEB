@@ -222,7 +222,7 @@
 .barber-photo-content {
   display: flex;
   height: 80px;
-  width: 100px;
+  width: 80px;
   border-radius: 50%;
   align-items: center;
 }

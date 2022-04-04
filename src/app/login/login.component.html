@@ -1,0 +1,39 @@
+<div class="homepage-container">
+  <div class="carousel-container">
+    <ngb-carousel class="carousel-content" *ngIf="images">
+      <ng-template class="carousel-slide" ngbSlide *ngFor="let image of images">
+        <div class="picsum-img-wrapper" style="  background-image: linear-gradient(
+              to bottom,
+              rgba(0, 0, 0, 0.427),
+              rgba(0, 0, 0, 0.227),
+              rgba(0, 0, 0, 0.2)
+            ),
+            url({{image}});">
+        </div>
+      </ng-template>
+    </ngb-carousel>
+  </div>
+  <div class="main-caption-container">
+    <div class="main-caption">
+      <div class="caption-title">
+        Login
+      </div>
+      <div class="caption-steps-content">
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" placeholder="email" />
+        </div>
+        <div class="caption-step-two">
+          <input #searchBox id="search-box" placeholder="password" />
+        </div>
+        <div class="caption-step-question">
+          <div class="create-account-link" routerLink="/register">
+            No account? Click here!
+          </div>
+        </div>
+      </div>
+      <div class="caption-button">
+        <button mat-raised-button class="schedule-button" routerLink="/salons">Login</button>
+      </div>
+    </div>
+  </div>
+</div>
