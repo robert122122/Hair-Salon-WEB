@@ -2,7 +2,6 @@
   width: 100%;
   height: 100%;
   background-color: rgba(255, 255, 255, 0.768);
-  /* background-color: rgb(144, 142, 142); */
 }
 
 .salon-details-content-container {
@@ -41,7 +40,7 @@
 
 .salon-details-name {
   display: flex;
-  width: 50%;
+  width: 100%;
   justify-content: center;
   text-align: center;
   font-size: 25px;
@@ -101,6 +100,13 @@
   margin-right: 0.5rem !important;
 }
 
+.salon-details-services-header {
+  width: 100%;
+  margin-left: 1rem;
+  font-size: 25px;
+  font-weight: 500;
+}
+
 .example-stepper {
   margin-top: 8px;
 }
@@ -147,11 +153,16 @@
 .button-text {
   text-align: left;
   font-size: 20px;
+  width: 50%;
+}
+
+.service-name {
+  width: 50%;
 }
 
 .service-time {
   display: flex;
-  width: 100%;
+  width: 50%;
   justify-content: flex-end;
   align-items: center;
 }
@@ -176,21 +187,30 @@
 }
 
 .salon-details-service-list {
-    -webkit-animation: slide 2.5s forwards;
-    -webkit-animation-delay: 4s;
-    animation: slide 2.5s forwards;
-    animation-delay: 4s;
+  -webkit-animation: slide 2.5s forwards;
+  -webkit-animation-delay: 4s;
+  animation: slide 2.5s forwards;
+  animation-delay: 4s;
 }
 
 @-webkit-keyframes slide {
-    100% { left: 0; }
+  100% {
+    left: 0;
+  }
 }
 
 @keyframes slide {
-    100% { left: 0; }
+  100% {
+    left: 0;
+  }
 }
 
 .salon-details-service:hover {
+  border-radius: 10px;
+  background-color: rgba(208, 204, 204, 0.544);
+}
+
+.salon-details-barber:hover {
   border-radius: 10px;
   background-color: rgba(208, 204, 204, 0.544);
 }
@@ -230,8 +250,8 @@
 .barber-photo {
   width: 100%;
   height: 100%;
-  background-size: cover;
-  background-position: center;
+  /* background-size: cover;
+  background-position: center; */
   border-radius: 50%;
 }
 
@@ -264,48 +284,165 @@
 
 .demo-inline-calendar-card {
   width: 40%;
-  height:400px;
+  height: 400px;
 }
 
-.hours-available{
-    width: 60%;
-    display: flex;
-    height: 100%;
-    flex-direction: column;
-    align-items: center;
+.hours-available {
+  width: 60%;
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
 }
 
 .mat-chip {
   width: 150px;
   background-color: white;
   outline: 1px solid var(--main-color);
-  color:black;
-  border-radius:20px;
+  color: black;
+  border-radius: 20px;
   text-align: center;
-  margin-bottom:0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 :host /deep/ .mat-card {
-    background-color:white;
-    color:black;
+  background-color: white;
+  color: black;
 }
 
-:host /deep/ .mat-calendar-table-header{
-    color: gray;
+:host /deep/ .mat-calendar-table-header {
+  color: gray;
 }
 
-:host /deep/ .mat-calendar-body-selected{
-    background-color:var(--main-color);
+:host /deep/ .mat-calendar-body-selected {
+  background-color: var(--main-color);
 }
 
-:host /deep/ .mat-calendar-body-cell-content{
-    color:black;
+:host /deep/ .mat-calendar-body-cell-content {
+  color: black;
 }
 
-:host /deep/ .mat-calendar-body-disabled>.mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
-    color:rgba(128, 128, 128, 0.503);
+:host
+  /deep/
+  .mat-calendar-body-disabled
+  > .mat-calendar-body-cell-content:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+  color: rgba(128, 128, 128, 0.503);
 }
 
-:host /deep/ .mat-tab-labels{
-    flex-direction: column;
+:host /deep/ .mat-tab-labels {
+  flex-direction: column;
+}
+
+.salon-details-services {
+  margin-top: 1rem;
+}
+
+.salon-details-barbers {
+  padding: 1rem;
+}
+
+.service-content {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding:1rem;
+}
+
+.service-text {
+  text-align: left;
+  font-size: 20px;
+  width: 50%;
+}
+
+.service-name {
+  width: 50%;
+}
+
+.service-time {
+  display: flex;
+  width: 50%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.service-cost {
+  font-weight: 100;
+}
+
+.salon-details-barber {
+}
+
+.barber-content {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 1rem;
+}
+
+.salon-details-description {
+  width: 80%;
+  margin: 1rem;
+  color: gray;
+  font-weight: 100;
+}
+
+.salon-details-reviews {
+  margin-top: 1rem;
+}
+
+.salon-details-review {
+  padding: 1rem;
+}
+
+.salon-review-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.review-user {
+  font-size: 20px;
+}
+
+.review-content {
+  display: flex;
+  margin: 1rem;
+  width: 100%;
+}
+
+.review-text {
+  width: 80%;
+  padding-left: 1rem;
+  border-left: 3px solid var(--main-color);
+  color: gray;
+}
+
+.review-user-photo {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  outline: 3px solid rgb(223, 223, 223);
+}
+
+.user-icon {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  border-radius: 50%;
+  color: rgb(172, 172, 172);
+}
+
+.review-rating {
+  font-size: 15px;
 }

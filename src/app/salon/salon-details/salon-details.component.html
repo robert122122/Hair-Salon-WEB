@@ -15,15 +15,11 @@
               <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
             </span>
           </ng-template>
-
           <ngb-rating [(rate)]="salon.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-
           ({{reviews.length}} reviews)
         </div>
       </div>
       <div class="salon-details-menu">
-
-
 
         <mat-selection-list #navigation [multiple]="false">
 
@@ -50,7 +46,7 @@
       <div class="salon-details-services-header">
         {{navigation.selectedOptions.selected[0]?.value}}
       </div>
-      <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value ===menuItems[0]">
+      <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
         <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
           <mat-step [stepControl]="firstFormGroup" label="Select Service">
             <form [formGroup]="firstFormGroup">
@@ -129,46 +125,71 @@
           </mat-step>
         </mat-stepper>
       </div>
-      <!-- <mat-tab-group>
-          .
-        <mat-tab>
-          <ng-template mat-tab-label>
-              <mat-icon class="salon-details-menu-icon">date_range</mat-icon>{{menuItems[0]}}
-          </ng-template>
-          Content 1
-        </mat-tab>
-
-        <mat-tab>
-          <ng-template mat-tab-label>
-              <mat-icon class="salon-details-menu-icon">view_list</mat-icon>{{menuItems[1]}}
-          </ng-template>
-          Content 2
-        </mat-tab>
-
-        <mat-tab>
-          <ng-template mat-tab-label>
-              <mat-icon class="salon-details-menu-icon">account_circle</mat-icon>{{menuItems[2]}}
-          </ng-template>
-
-          Content 3
-        </mat-tab>
-
-        <mat-tab>
-          <ng-template mat-tab-label>
-              <mat-icon class="salon-details-menu-icon"> location_on</mat-icon>{{menuItems[3]}}
-          </ng-template>
-
-          Content 3
-        </mat-tab>
-
-        <mat-tab>
-          <ng-template mat-tab-label>
-              <mat-icon class="salon-details-menu-icon"> reviews_outlined</mat-icon>{{menuItems[4]}}
-          </ng-template>
-
-          Content 3
-        </mat-tab>
-      </mat-tab-group> -->
+      <div class="salon-details-services" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[1]">
+        <div class="salon-details-service" *ngFor="let service of services">
+            <div class="service-content">
+              <div class="service-text">
+                <div class="service-name">
+                  {{service.serviceName}}
+                </div>
+                <div class="service-cost">
+                  {{service.cost}} lei
+                </div>
+              </div>
+              <div class="service-time">
+                <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
+              </div>
+            </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <div class="salon-details-barbers" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[2]">
+        <div class="salon-details-barber" *ngFor="let barber of barbers">
+          <div class="barber-content">
+            <div class="barber-photo-content">
+              <img src="{{barber.image}}" class="barber-photo">
+            </div>
+            <div class="barber-button-text">
+              <div class="barber-firstname">
+                {{barber.firstName}}
+              </div>
+              <div class="barber-lastname">
+                {{barber.lastName}}
+              </div>
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
+      <div class="salon-details-description" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[3]">
+        {{salon.description}}
+      </div>
+      <div class="salon-details-reviews" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[4]">
+        <div class="salon-details-review" *ngFor="let review of reviews">
+          <div class="salon-review-content">
+            <div class="review-user">
+              User Anonim
+            </div>
+            <div class="review-content">
+              <div class="review-text">
+                {{review.text}}
+              </div>
+              <div class="review-user-photo">
+                <div class="user-photo">
+                  <mat-icon class="user-icon"> person</mat-icon>
+                </div>
+                <div class="review-rating">
+                  <ngb-rating [(rate)]="review.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                </div>
+              </div>
+            </div>
+            <div class="review-footer">
+              {{review.dateAdded}}
+            </div>
+          </div>
+          <mat-divider></mat-divider>
+        </div>
+      </div>
     </div>
   </div>
 </div>
