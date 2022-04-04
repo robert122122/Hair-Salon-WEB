@@ -9,6 +9,7 @@ import { map, Observable } from 'rxjs';
 import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Barber } from '../barber';
+import { AlertService } from 'src/app/alert.service';
 
 export interface serviceTime{
   hour: number,
@@ -86,7 +87,8 @@ export class SalonDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     private salonService: SalonService,
     private _formBuilder: FormBuilder,
-    breakpointObserver: BreakpointObserver
+    breakpointObserver: BreakpointObserver,
+    private alertService: AlertService
   ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -121,6 +123,7 @@ export class SalonDetailsComponent implements OnInit {
     this.selected?.setHours(timeToSet.hour);
     this.selected?.setMinutes(timeToSet.minute);
     console.log(this.selected);
+    this.alertService.alertSuccess("Appointment success!");
   }
 
 }

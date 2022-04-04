@@ -45,3 +45,23 @@ body {
   background-image: linear-gradient(#ffdf00, rgba(171, 166, 166, 0.687));
   border-radius: 25px;
 }
+
+.success-snackbar {
+  background-color: rgba(15, 202, 15, 0.898);
+  color: white;
+}
+
+.info-snackbar {
+  background-color: rgb(116, 236, 232);
+  color: rgb(255, 255, 255);
+}
+
+.warning-snackbar {
+  background-color: rgba(248, 101, 3, 0.898);
+  color: white;
+}
+
+.error-snackbar {
+  background-color: rgb(250, 46, 46);
+  color: white;
+}
