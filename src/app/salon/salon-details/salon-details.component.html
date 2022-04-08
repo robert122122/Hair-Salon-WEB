@@ -47,12 +47,12 @@
         {{navigation.selectedOptions.selected[0]?.value}}
       </div>
       <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
-        <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!">
-          <mat-step [stepControl]="firstFormGroup" label="Select Service">
+        <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
+          <mat-step [stepControl]="firstFormGroup" label="Select Service" [completed]="serviceCompleted">
             <form [formGroup]="firstFormGroup">
               <div class="salon-details-service" *ngFor="let service of services">
                 <button mat-button class="salon-service" matStepperNext>
-                  <div class="button-content">
+                  <div class="button-content" (click)="setServiceId(service.id)">
                     <div class="button-text">
                       <div class="service-name">
                         {{service.serviceName}}
@@ -73,13 +73,12 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="secondFormGroup" label="Select Barber">
+          <mat-step [stepControl]="secondFormGroup" label="Select Barber" [completed]="barberCompleted">
             <form [formGroup]="secondFormGroup">
               <div class="salon-details-service" *ngFor="let barber of barbers">
                 <button mat-button class="salon-service" matStepperNext>
-                  <div class="button-content">
-                    <div class="barber-photo-content">
-                      <img src="{{barber.image}}" class="barber-photo">
+                  <div class="button-content" (click)="setBarberId(barber.id)">
+                    <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
                     </div>
                     <div class="barber-button-text">
                       <div class="barber-firstname">
@@ -101,16 +100,20 @@
               </div>
             </form>
           </mat-step>
-          <mat-step [stepControl]="thirdFormGroup" label="Select Date">
+          <mat-step [stepControl]="thirdFormGroup" label="Select Date" [editable]="" [completed]="bookingDateCompleted">
             <form [formGroup]="thirdFormGroup">
               <div class="calendar-form">
                 <mat-card class="demo-inline-calendar-card">
                   <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
                 </mat-card>
-                <div class="hours-available">
-                  <button mat-button class="mat-chip" *ngFor="let time of availableTimes" (click)="setTimeToDate(time)"
-                    matStepperNext>
-                    {{time.hour}}:{{time.minute}}
+                <div class="hours-available" *ngIf="selected != null">
+                  <button mat-button class="mat-chip" *ngFor="let time of availableTimes" matStepperNext>
+                    <div class="button-time-text" *ngIf="time.minute == 0" (click)="setTimeToDate(time)">
+                      {{time.hour}}:{{time.minute}}0
+                    </div>
+                    <div class="button-time-text" *ngIf="time.minute != 0" (click)="setTimeToDate(time)">
+                      {{time.hour}}:{{time.minute}}
+                    </div>
                   </button>
                 </div>
               </div>
@@ -119,76 +122,33 @@
               </div>
             </form>
           </mat-step>
-          <mat-step>
+          <mat-step [stepControl]="fourthFormGroup" [completed]="false">
             <ng-template matStepLabel>Done</ng-template>
-            <p>You are now done.</p>
+            <div class="done-message-content">
+              <div class="done-message-icon">
+                <mat-icon class="done-icon">done</mat-icon>
+              </div>
+              <div class="done-message-title">
+                Enjoy your appointment!
+              </div>
+              <div class="done-message-subtitle">
+                Check your email for details.
+              </div>
+            </div>
           </mat-step>
         </mat-stepper>
       </div>
       <div class="salon-details-services" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[1]">
-        <div class="salon-details-service" *ngFor="let service of services">
-            <div class="service-content">
-              <div class="service-text">
-                <div class="service-name">
-                  {{service.serviceName}}
-                </div>
-                <div class="service-cost">
-                  {{service.cost}} lei
-                </div>
-              </div>
-              <div class="service-time">
-                <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
-              </div>
-            </div>
-          <mat-divider></mat-divider>
-        </div>
+        <app-salon-services></app-salon-services>
       </div>
       <div class="salon-details-barbers" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[2]">
-        <div class="salon-details-barber" *ngFor="let barber of barbers">
-          <div class="barber-content">
-            <div class="barber-photo-content">
-              <img src="{{barber.image}}" class="barber-photo">
-            </div>
-            <div class="barber-button-text">
-              <div class="barber-firstname">
-                {{barber.firstName}}
-              </div>
-              <div class="barber-lastname">
-                {{barber.lastName}}
-              </div>
-            </div>
-          </div>
-          <mat-divider></mat-divider>
-        </div>
+        <app-salon-barbers></app-salon-barbers>
       </div>
       <div class="salon-details-description" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[3]">
-        {{salon.description}}
+        <app-salon-description></app-salon-description>
       </div>
       <div class="salon-details-reviews" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[4]">
-        <div class="salon-details-review" *ngFor="let review of reviews">
-          <div class="salon-review-content">
-            <div class="review-user">
-              User Anonim
-            </div>
-            <div class="review-content">
-              <div class="review-text">
-                {{review.text}}
-              </div>
-              <div class="review-user-photo">
-                <div class="user-photo">
-                  <mat-icon class="user-icon"> person</mat-icon>
-                </div>
-                <div class="review-rating">
-                  <ngb-rating [(rate)]="review.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                </div>
-              </div>
-            </div>
-            <div class="review-footer">
-              {{review.dateAdded}}
-            </div>
-          </div>
-          <mat-divider></mat-divider>
-        </div>
+        <app-salon-reviews></app-salon-reviews>
       </div>
     </div>
   </div>

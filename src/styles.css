@@ -3,7 +3,7 @@
 
 :root {
   --main-color: #febb02;
-  --complementary: #0245fe;
+  --complementary: #3f72fe;
 }
 
 * {
@@ -22,16 +22,6 @@ body {
   width: 100%; 
   min-height: 100vh;
 }
-
-/* html,
-body {
-  height: 100%;
-}
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-  background-color: #f4f4f4;
-} */
 
 ::-webkit-scrollbar {
   width: 5px;

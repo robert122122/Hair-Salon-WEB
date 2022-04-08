@@ -1,0 +1,16 @@
+<div class="salon-details-service" *ngFor="let service of services">
+  <div class="service-content">
+    <div class="service-text">
+      <div class="service-name">
+        {{service.serviceName}}
+      </div>
+      <div class="service-cost">
+        {{service.cost}} lei
+      </div>
+    </div>
+    <div class="service-time">
+      <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</div>

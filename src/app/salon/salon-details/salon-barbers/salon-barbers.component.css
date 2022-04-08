@@ -1,0 +1,35 @@
+.salon-details-barber:hover {
+  border-radius: 10px;
+  background-color: rgba(208, 204, 204, 0.544);
+}
+
+.barber-content {
+  display: flex;
+  align-items: center;
+  width: 80%;
+  padding: 1rem;
+}
+
+.barber-photo-content {
+  display: flex;
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+}
+
+.barber-button-text {
+  text-align: left;
+  margin-left: 2rem;
+  font-size: 15px;
+}
+
+.barber-lastname {
+  font-weight: 100;
+}
+
+.mat-divider {
+  border-top-color: rgba(128, 128, 128, 0.136);
+}

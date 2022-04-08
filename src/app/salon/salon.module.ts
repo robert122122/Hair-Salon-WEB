@@ -7,12 +7,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { SalonsComponent } from './salons/salons.component';
 import { SalonDetailsComponent } from './salon-details/salon-details.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { SalonServicesComponent } from './salon-details/salon-services/salon-services.component';
+import { SalonBarbersComponent } from './salon-details/salon-barbers/salon-barbers.component';
+import { SalonDescriptionComponent } from './salon-details/salon-description/salon-description.component';
+import { SalonReviewsComponent } from './salon-details/salon-reviews/salon-reviews.component';
 
 
 @NgModule({
   declarations: [
     SalonsComponent,
-    SalonDetailsComponent
+    SalonDetailsComponent,
+    SalonServicesComponent,
+    SalonBarbersComponent,
+    SalonDescriptionComponent,
+    SalonReviewsComponent
   ],
   imports: [
     CommonModule,

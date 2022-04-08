@@ -1,0 +1,29 @@
+<div class="salon-details-review" *ngFor="let review of reviews">
+  <div class="salon-review-content">
+    <div class="review-user">
+      User Anonim
+    </div>
+    <div class="review-content">
+      <div class="review-text">
+        {{review.text}}
+      </div>
+      <div class="review-user-photo">
+        <div class="user-photo">
+          <mat-icon class="user-icon"> person</mat-icon>
+        </div>
+        <div class="review-rating">
+          <ng-template #t let-fill="fill">
+            <span class="star" [class.full]="fill === 100">
+              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+            </span>
+          </ng-template>
+          <ngb-rating [(rate)]="review.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+        </div>
+      </div>
+    </div>
+    <div class="review-footer">
+      {{review.dateAdded}}
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</div>

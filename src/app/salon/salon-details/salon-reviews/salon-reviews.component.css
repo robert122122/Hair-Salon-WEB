@@ -1,0 +1,83 @@
+/* bootstrap review stars */
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  color: #d3d3d3;
+}
+.full {
+  color: var(--main-color);
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: var(--main-color);
+}
+
+/*  */
+
+.salon-details-review {
+  padding: 1rem;
+}
+
+.salon-review-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.review-user {
+  font-size: 20px;
+}
+
+.review-content {
+  display: flex;
+  margin: 1rem;
+  width: 100%;
+}
+
+.review-text {
+  width: 80%;
+  padding-left: 1rem;
+  border-left: 3px solid var(--main-color);
+  color: gray;
+}
+
+.review-user-photo {
+  width: 20%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.user-photo {
+  display: flex;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  outline: 3px solid rgb(223, 223, 223);
+}
+
+.user-icon {
+  height: 50px;
+  width: 50px;
+  font-size: 50px;
+  border-radius: 50%;
+  color: rgb(172, 172, 172);
+}
+
+.review-rating {
+  font-size: 15px;
+}
+
+.review-footer {
+  font-weight: 100;
+}
+
+.mat-divider {
+  border-top-color: rgba(128, 128, 128, 0.136);
+}

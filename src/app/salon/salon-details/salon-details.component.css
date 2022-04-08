@@ -138,6 +138,7 @@
   width: 100% !important;
   display: flex;
   align-items: center;
+  justify-content: center;
 }
 
 .mat-divider {
@@ -245,13 +246,13 @@
   width: 80px;
   border-radius: 50%;
   align-items: center;
+  background-size: cover;
+  background-position: center;
 }
 
 .barber-photo {
   width: 100%;
   height: 100%;
-  /* background-size: cover;
-  background-position: center; */
   border-radius: 50%;
 }
 
@@ -296,6 +297,8 @@
 }
 
 .mat-chip {
+  display: flex;
+  justify-content: center;
   width: 150px;
   background-color: white;
   outline: 1px solid var(--main-color);
@@ -303,6 +306,11 @@
   border-radius: 20px;
   text-align: center;
   margin-bottom: 0.5rem;
+}
+
+.mat-chip:hover {
+  background-color: var(--main-color);
+  color: white;
 }
 
 :host /deep/ .mat-card {
@@ -345,7 +353,7 @@
   display: flex;
   align-items: center;
   width: 80%;
-  padding:1rem;
+  padding: 1rem;
 }
 
 .service-text {
@@ -367,9 +375,6 @@
 
 .service-cost {
   font-weight: 100;
-}
-
-.salon-details-barber {
 }
 
 .barber-content {
@@ -445,4 +450,47 @@
 
 .review-rating {
   font-size: 15px;
+}
+
+.done-message-content {
+  padding-top: 2rem;
+  height: 100%;
+  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.done-message-icon {
+  border-radius: 50%;
+  background-color: var(--main-color);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.done-icon {
+  font-size: 50px;
+  width: 50px;
+  height: 50px;
+  color: white;
+}
+
+.done-message-title {
+  text-align: center;
+  font-size: 30px;
+}
+
+:host /deep/ .mat-calendar-body-cell-content {
+  transition: 0.2s;
+}
+
+:host /deep/ .mat-calendar-body-cell-content:hover {
+  background-color: var(--complementary) !important;
+  color: white;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }

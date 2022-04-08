@@ -1,0 +1,15 @@
+<div class="salon-details-barber" *ngFor="let barber of barbers">
+  <div class="barber-content">
+    <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
+    </div>
+    <div class="barber-button-text">
+      <div class="barber-firstname">
+        {{barber.firstName}}
+      </div>
+      <div class="barber-lastname">
+        {{barber.lastName}}
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+</div>
