@@ -8,6 +8,14 @@ import { map, Observable } from 'rxjs';
 import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AlertService } from 'src/app/alert.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
+
+export interface DialogData {
+  salonId: number;
+  animal: string;
+  name: string;
+}
 
 @Component({
   selector: 'app-salon-reviews',
@@ -18,17 +26,31 @@ export class SalonReviewsComponent implements OnInit {
 
   reviews: Review[] = [];
 
+  animal: string | undefined;
+  name: string | undefined;
 
-  constructor(    private route: ActivatedRoute,
+  salonId = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
+
+  constructor(private route: ActivatedRoute,
     private salonService: SalonService,
     private _formBuilder: FormBuilder,
-    breakpointObserver: BreakpointObserver,) { }
+    public dialog: MatDialog) { }
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(AddReviewDialogComponent, {
+      width: '40%',
+      data: { salonId: this.salonId, animal: this.animal },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.reviews.push(result);
+    });
+  }
 
   ngOnInit(): void {
 
-    const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-
-    this.salonService.getReviewsBySalon(id).subscribe((reviews: Review[]) => {
+    this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
     })
   }

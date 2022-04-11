@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Barber } from './barber';
 import { Booking, BookingResponse } from './booking';
-import { Review } from './salon-details/review';
+import { Review, ReviewPost } from './salon-details/review';
 import { Salon } from './salons/salon';
 import { Service } from './service';
 
@@ -36,5 +36,9 @@ export class SalonService {
 
   bookAppointment(booking: Booking): Observable<BookingResponse>{
     return this.httpService.post<BookingResponse>(`https://localhost:44396/api/Booking`, booking);
+  }
+
+  addReview(review: ReviewPost): Observable<ReviewPost> {
+    return this.httpService.post<ReviewPost>('https://localhost:44396/api/Review', review);
   }
 }

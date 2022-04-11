@@ -11,6 +11,7 @@ import { SalonServicesComponent } from './salon-details/salon-services/salon-ser
 import { SalonBarbersComponent } from './salon-details/salon-barbers/salon-barbers.component';
 import { SalonDescriptionComponent } from './salon-details/salon-description/salon-description.component';
 import { SalonReviewsComponent } from './salon-details/salon-reviews/salon-reviews.component';
+import { AddReviewDialogComponent } from './salon-details/salon-reviews/add-review-dialog/add-review-dialog.component';
 
 
 @NgModule({
@@ -20,7 +21,8 @@ import { SalonReviewsComponent } from './salon-details/salon-reviews/salon-revie
     SalonServicesComponent,
     SalonBarbersComponent,
     SalonDescriptionComponent,
-    SalonReviewsComponent
+    SalonReviewsComponent,
+    AddReviewDialogComponent
   ],
   imports: [
     CommonModule,

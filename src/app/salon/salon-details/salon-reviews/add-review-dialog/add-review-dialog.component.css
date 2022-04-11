@@ -1,0 +1,25 @@
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 3rem;
+  color: #d3d3d3;
+}
+.full {
+  color: var(--main-color);
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: var(--main-color);
+}
+
+.dialog-container {
+    width: 100%;
+    height: 100%;
+}
+
+:host /deep/ .mat-dialog-content { 
+    display: flex;
+    flex-direction: column;
+}

@@ -17,6 +17,40 @@
 
 /*  */
 
+.add-review-button-container{
+  display:flex;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+  margin-right: 1rem;
+}
+
+.add-review-button{
+  height: 100%;
+  align-items: center;
+}
+
+.add-review-button-content{
+  display: flex;
+  justify-content:center;
+  font-size: 30px;
+  width:40px !important;
+  height:40px;
+  color:white;
+  border-radius:50%;
+  text-align:center;
+  background-color:var(--main-color);
+  align-items:center;
+  transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.add-review-button-content:hover{
+  background-color: white;
+  outline: 2px solid var(--main-color);
+  color: var(--main-color);
+}
+
 .salon-details-review {
   padding: 1rem;
 }

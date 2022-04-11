@@ -1,0 +1,21 @@
+<div class="dialog-container">
+  <h1 mat-dialog-title>Add review</h1>
+  <div mat-dialog-content>
+    <p>Share your thoughts about this salon</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Comments</mat-label>
+      <input matInput [(ngModel)]="newReview.text">
+    </mat-form-field>
+    <ng-template #t let-fill="fill">
+      <span class="star" [class.full]="fill === 100">
+        <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+      </span>
+    </ng-template>
+    <ngb-rating [(rate)]="newReview.rating" [starTemplate]="t" [max]="5"></ngb-rating>
+    <hr>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button (click)="onNoClick()">No Thanks</button>
+    <button mat-button [mat-dialog-close]="newReview" (click)="addReview()" cdkFocusInitial>Ok</button>
+  </div>
+</div>
