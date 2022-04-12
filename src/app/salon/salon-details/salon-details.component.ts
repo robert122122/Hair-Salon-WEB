@@ -2,15 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Salon } from '../salons/salon';
 import { SalonService } from '../salon.service';
-import { Service } from '../service';
-import { Review } from './review';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
 import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Barber } from '../barber';
 import { AlertService } from 'src/app/alert.service';
 import { Booking } from '../booking';
+import { Review } from './salon-reviews/review';
+import { Service } from './salon-services/service';
+import { Barber } from './salon-barbers/barber';
 
 export interface serviceTime {
   hour: number,

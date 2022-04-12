@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Barber } from '../../barber';
+import { Barber } from './barber';
 import { SalonService } from '../../salon.service';
 
 @Component({

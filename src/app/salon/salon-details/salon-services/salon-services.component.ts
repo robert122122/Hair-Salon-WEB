@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../../salon.service';
-import { Service } from '../../service';
+import { Service } from './service';
 
 @Component({
   selector: 'app-salon-services',

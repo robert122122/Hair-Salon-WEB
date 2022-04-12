@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../../salon.service';
-import { Review } from '../review';
+import { Review } from './review';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
