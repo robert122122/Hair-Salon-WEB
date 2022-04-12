@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../../salon.service';
-import { Review } from './review';
+import { Review } from '../review';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { map, Observable } from 'rxjs';
@@ -44,7 +44,10 @@ export class SalonReviewsComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.reviews.push(result);
+      console.log(result);
+      if (result.rating > 0 && result.text.length >= 10) {
+        this.reviews.push(result);
+      }
     });
   }
 

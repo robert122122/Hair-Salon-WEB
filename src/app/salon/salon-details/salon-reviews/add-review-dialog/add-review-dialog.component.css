@@ -23,3 +23,27 @@
     display: flex;
     flex-direction: column;
 }
+
+:host /deep/ .mat-dialog-actions{
+  justify-content:center;
+}
+
+:host /deep/ .mat-dialog-title{
+  text-align: center;
+}
+
+.add-review-button{
+  width: 50%;
+  border: 1px solid var(--main-color);
+  color:white;
+  transition: 0.5s;
+  border-radius: 15px;
+}
+
+.add-review-button:hover{
+  background-color: var(--main-color);
+}
+
+.info-button{
+  box-shadow: none;
+}

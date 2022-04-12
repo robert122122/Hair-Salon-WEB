@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Barber } from './salon-details/salon-barbers/barber';
 import { Booking, BookingResponse } from './booking';
-import { Review, ReviewPost } from './salon-details/salon-reviews/review';
+import { Review, ReviewPost } from './salon-details/review';
 import { Salon } from './salons/salon';
 import { Service } from './salon-details/salon-services/service';
 

@@ -1,21 +1,27 @@
 <div class="dialog-container">
-  <h1 mat-dialog-title>Add review</h1>
+  <h1 mat-dialog-title>Add review
+    <button mat-raised-button class="info-button"
+      matTooltip="Make sure the text has at least 10 characters and review at least 1">
+      <mat-icon>info</mat-icon>
+    </button>
+  </h1>
   <div mat-dialog-content>
-    <p>Share your thoughts about this salon</p>
-    <mat-form-field appearance="fill">
-      <mat-label>Comments</mat-label>
-      <input matInput [(ngModel)]="newReview.text">
-    </mat-form-field>
     <ng-template #t let-fill="fill">
       <span class="star" [class.full]="fill === 100">
         <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
       </span>
     </ng-template>
-    <ngb-rating [(rate)]="newReview.rating" [starTemplate]="t" [max]="5"></ngb-rating>
+    <p>Give a note</p>
+    <ngb-rating [(rate)]="newReview.rating" [starTemplate]="t" [max]="5" (rateChange)="checkReview()"></ngb-rating>
     <hr>
+    <p>Share your thoughts about this salon</p>
+    <mat-form-field appearance="fill">
+      <mat-label>Comments</mat-label>
+      <input matInput [(ngModel)]="newReview.text" (ngModelChange)="checkReview()">
+    </mat-form-field>
   </div>
   <div mat-dialog-actions>
-    <button mat-button (click)="onNoClick()">No Thanks</button>
-    <button mat-button [mat-dialog-close]="newReview" (click)="addReview()" cdkFocusInitial>Ok</button>
+    <button mat-button [disabled]="disabledButton" class="add-review-button green" [mat-dialog-close]="newReview"
+      (click)="addReview()" cdkFocusInitial>Add</button>
   </div>
 </div>

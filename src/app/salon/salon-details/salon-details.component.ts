@@ -8,7 +8,7 @@ import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AlertService } from 'src/app/alert.service';
 import { Booking } from '../booking';
-import { Review } from './salon-reviews/review';
+import { Review } from './review';
 import { Service } from './salon-services/service';
 import { Barber } from './salon-barbers/barber';
 

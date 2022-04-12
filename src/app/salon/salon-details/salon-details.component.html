@@ -21,9 +21,9 @@
       </div>
       <div class="salon-details-menu">
 
-        <mat-selection-list #navigation [multiple]="false">
-
-          <mat-list-option [value]="menuItems[0]">
+        <mat-selection-list #navigation  [multiple]="false">
+          
+          <mat-list-option [selected]="true" [value]="menuItems[0]">
             <mat-icon class="salon-details-menu-icon">date_range</mat-icon>{{menuItems[0]}}
           </mat-list-option>
           <mat-list-option [value]="menuItems[1]">
