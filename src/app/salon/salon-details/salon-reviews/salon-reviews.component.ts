@@ -6,6 +6,7 @@ import { Review } from '../review';
 import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
+import { DatePipe } from '@angular/common';
 
 export interface DialogData {
   salonId: number;
@@ -22,9 +23,6 @@ export class SalonReviewsComponent implements OnInit {
 
   reviews: Review[] = [];
 
-  animal: string | undefined;
-  name: string | undefined;
-
   value = '';
 
   sortingOptions = ["DateAdded Asc", "DateAdded Desc", "Rating Asc", "Rating Desc"];
@@ -33,6 +31,8 @@ export class SalonReviewsComponent implements OnInit {
 
   salonId = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
 
+  pipe = new DatePipe('en-US');
+
   constructor(private route: ActivatedRoute,
     private salonService: SalonService,
     public dialog: MatDialog) { }
@@ -40,13 +40,13 @@ export class SalonReviewsComponent implements OnInit {
   openDialog(): void {
     let dialogRef = this.dialog.open(AddReviewDialogComponent, {
       width: '40%',
-      data: { salonId: this.salonId, animal: this.animal },
+      data: { salonId: this.salonId },
     });
 
     dialogRef.afterClosed().subscribe(result => {
       if (result.rating > 0 && result.text.length >= 10) {
-        this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[])=>{
-          this.reviews=reviews;
+        this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
+          this.reviews = reviews;
         })
       }
     });
@@ -57,6 +57,11 @@ export class SalonReviewsComponent implements OnInit {
     this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
     })
+
+  }
+
+  formatDate(date: Date): string | null {
+    return this.pipe.transform(date, 'MMMM d, y, h:mm:ss a');
   }
 
   sortSalons(option: string): any {
