@@ -47,3 +47,7 @@
 .info-button{
   box-shadow: none;
 }
+
+:ng-deep .mat-dialog-container{
+  background:white !important;
+} 

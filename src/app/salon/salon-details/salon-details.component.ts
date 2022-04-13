@@ -159,7 +159,6 @@ export class SalonDetailsComponent implements OnInit {
     if (this.selected != null) {
       this.booking.bookingDate = this.selected;
     }
-
     this.salonService.bookAppointment(this.booking).subscribe((booking: Booking) => {
     });
   }
@@ -170,8 +169,9 @@ export class SalonDetailsComponent implements OnInit {
 
     this.setBookingDate();
 
-    this.bookingDateCompleted = true;
     
+    this.bookingDateCompleted = true;
+
     setTimeout(() => {                           // <<<---using ()=> syntax
       this.resetStepper();
     }, 200);

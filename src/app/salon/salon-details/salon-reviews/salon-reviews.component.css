@@ -17,35 +17,42 @@
 
 /*  */
 
-.add-review-button-container{
-  display:flex;
+.add-review-button-container {
+  display: flex;
   width: 100%;
   justify-content: flex-end;
   align-items: center;
-  margin-right: 1rem;
+  padding-right: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 17px 10px -15px;
 }
 
-.add-review-button{
+.review-button-container{
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+
+.add-review-button {
   height: 100%;
   align-items: center;
 }
 
-.add-review-button-content{
+.add-review-button-content {
   display: flex;
-  justify-content:center;
+  justify-content: center;
   font-size: 30px;
-  width:40px !important;
-  height:40px;
-  color:white;
-  border-radius:50%;
-  text-align:center;
-  background-color:var(--main-color);
-  align-items:center;
+  width: 40px !important;
+  height: 40px;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  background-color: var(--main-color);
+  align-items: center;
   transition: 0.5s;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.add-review-button-content:hover{
+.add-review-button-content:hover {
   background-color: white;
   outline: 2px solid var(--main-color);
   color: var(--main-color);
@@ -114,4 +121,67 @@
 
 .mat-divider {
   border-top-color: rgba(128, 128, 128, 0.136);
+}
+
+.sort-search {
+  display: flex;
+}
+
+.sort-bar {
+  margin-right: 2rem;
+}
+
+.search-bar {
+  display: flex;
+  align-items: center;
+}
+
+
+.mat-form-field {
+  width: 200px !important;
+}
+
+.mat-form-field-wrapper {
+  padding-bottom: none !important;
+}
+
+.mat-form-field {
+  width: 100%;
+}
+
+:host /deep/ .mat-form-field-type-mat-select .mat-form-field-label {
+  color: gray;
+}
+
+:host /deep/ .mat-select-value {
+  color: gray !important;
+}
+
+:host /deep/ .mat-form-field-flex {
+  background-color: rgba(255, 255, 255, 0) !important;
+}
+
+:host /deep/ .mat-option-text {
+  background-color: white !important;
+}
+
+.sort-bar /deep/ .mat-form-field-appearance-outline .mat-form-field-outline {
+  color: rgba(0, 0, 0, 0) !important;
+  background-color: white !important;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 5px;
+}
+
+:host /deep/ .mat-select-arrow {
+  color: var(--main-color) !important;
+}
+
+.mat-option {
+  background-color: white !important;
+  color: gray !important;
+}
+
+:host /deep/ .mat-form-field-wrapper{
+  padding:0 !important;
+  margin:1rem !important;
 }

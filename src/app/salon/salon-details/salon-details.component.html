@@ -43,9 +43,9 @@
       </div>
     </div>
     <div class="salon-details-services-content">
-      <div class="salon-details-services-header">
+      <!-- <div class="salon-details-services-header">
         {{navigation.selectedOptions.selected[0]?.value}}
-      </div>
+      </div> -->
       <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
         <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
           <mat-step [stepControl]="firstFormGroup" label="Select Service" [completed]="serviceCompleted">
