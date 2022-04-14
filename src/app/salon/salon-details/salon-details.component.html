@@ -1,155 +1,187 @@
-<div class="salon-details-main-container">
-  <div class="salon-details-content-container">
-    <div class="salon-details-content">
-      <div class="salon-details-content-header">
-        <div class="salon-details-photo">
-          <img src={{salon.logo}} class="salon-details-image" alt="">
-        </div>
-        <div class="salon-details-name">
-          {{salon.name}}
-        </div>
-        <div class="salon-details-rating">
-          {{salon.rating}}
-          <ng-template #t let-fill="fill">
-            <span class="star" [class.full]="fill === 100">
-              <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
-            </span>
-          </ng-template>
-          <ngb-rating [(rate)]="salon.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-          ({{reviews.length}} reviews)
-        </div>
-      </div>
-      <div class="salon-details-menu">
+<mat-sidenav-container>
+  <mat-sidenav #sidenav [(opened)]="opened">
+    <div class="salon-details-sidenav-menu">
 
-        <mat-selection-list #navigation  [multiple]="false">
-          
-          <mat-list-option [selected]="true" [value]="menuItems[0]">
-            <mat-icon class="salon-details-menu-icon">date_range</mat-icon>{{menuItems[0]}}
-          </mat-list-option>
-          <mat-list-option [value]="menuItems[1]">
-            <mat-icon class="salon-details-menu-icon">view_list</mat-icon>{{menuItems[1]}}
-          </mat-list-option>
-          <mat-list-option [value]="menuItems[2]">
-            <mat-icon class="salon-details-menu-icon">account_circle</mat-icon>{{menuItems[2]}}
-          </mat-list-option>
-          <mat-list-option [value]="menuItems[3]">
-            <mat-icon class="salon-details-menu-icon"> location_on</mat-icon>{{menuItems[3]}}
-          </mat-list-option>
-          <mat-list-option [value]="menuItems[4]">
-            <mat-icon class="salon-details-menu-icon"> reviews_outlined</mat-icon>{{menuItems[4]}}
-          </mat-list-option>
-        </mat-selection-list>
+      <mat-selection-list #navigation [multiple]="false">
 
-      </div>
+        <mat-list-option [selected]="true" [value]="menuItems[0]" (click)="sidenav.close()">
+          <mat-icon class="salon-details-menu-icon">date_range</mat-icon>{{menuItems[0]}}
+        </mat-list-option>
+        <mat-list-option [value]="menuItems[1]" (click)="sidenav.close()">
+          <mat-icon class="salon-details-menu-icon">view_list</mat-icon>{{menuItems[1]}}
+        </mat-list-option>
+        <mat-list-option [value]="menuItems[2]" (click)="sidenav.close()">
+          <mat-icon class="salon-details-menu-icon">account_circle</mat-icon>{{menuItems[2]}}
+        </mat-list-option>
+        <mat-list-option [value]="menuItems[3]" (click)="sidenav.close()">
+          <mat-icon class="salon-details-menu-icon"> location_on</mat-icon>{{menuItems[3]}}
+        </mat-list-option>
+        <mat-list-option [value]="menuItems[4]" (click)="sidenav.close()">
+          <mat-icon class="salon-details-menu-icon"> reviews_outlined</mat-icon>{{menuItems[4]}}
+        </mat-list-option>
+      </mat-selection-list>
+
     </div>
-    <div class="salon-details-services-content">
-      <!-- <div class="salon-details-services-header">
-        {{navigation.selectedOptions.selected[0]?.value}}
-      </div> -->
-      <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
-        <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
-          <mat-step [stepControl]="firstFormGroup" label="Select Service" [completed]="serviceCompleted">
-            <form [formGroup]="firstFormGroup">
-              <div class="salon-details-service" *ngFor="let service of services">
-                <button mat-button class="salon-service" matStepperNext>
-                  <div class="button-content" (click)="setServiceId(service.id)">
-                    <div class="button-text">
-                      <div class="service-name">
-                        {{service.serviceName}}
-                      </div>
-                      <div class="service-cost">
-                        {{service.cost}} lei
-                      </div>
-                    </div>
-                    <div class="service-time">
-                      <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
-                    </div>
-                  </div>
-                  <div class="button-forward-icon">
-                    <i class="fas fa-chevron-right" style="color:var(--main-color); font-size: 20px;"></i>
-                  </div>
-                </button>
-                <mat-divider></mat-divider>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="secondFormGroup" label="Select Barber" [completed]="barberCompleted">
-            <form [formGroup]="secondFormGroup">
-              <div class="salon-details-service" *ngFor="let barber of barbers">
-                <button mat-button class="salon-service" matStepperNext>
-                  <div class="button-content" (click)="setBarberId(barber.id)">
-                    <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
-                    </div>
-                    <div class="barber-button-text">
-                      <div class="barber-firstname">
-                        {{barber.firstName}}
-                      </div>
-                      <div class="barber-lastname">
-                        {{barber.lastName}}
-                      </div>
-                    </div>
-                  </div>
-                  <div class="button-forward-icon">
-                    <i class="fas fa-chevron-right" style="color:var(--main-color); font-size: 20px;"></i>
-                  </div>
-                </button>
-                <mat-divider></mat-divider>
-              </div>
-              <div>
-                <button mat-button matStepperPrevious class="back-button">Back</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="thirdFormGroup" label="Select Date" [editable]="" [completed]="bookingDateCompleted">
-            <form [formGroup]="thirdFormGroup">
-              <div class="calendar-form">
-                <mat-card class="demo-inline-calendar-card">
-                  <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
-                </mat-card>
-                <div class="hours-available" *ngIf="selected != null">
-                  <button mat-button class="mat-chip" *ngFor="let time of availableTimes" matStepperNext>
-                    <div class="button-time-text" *ngIf="time.minute == 0" (click)="setTimeToDate(time)">
-                      {{time.hour}}:{{time.minute}}0
-                    </div>
-                    <div class="button-time-text" *ngIf="time.minute != 0" (click)="setTimeToDate(time)">
-                      {{time.hour}}:{{time.minute}}
-                    </div>
-                  </button>
-                </div>
-              </div>
-              <div>
-                <button mat-button matStepperPrevious>Back</button>
-              </div>
-            </form>
-          </mat-step>
-          <mat-step [stepControl]="fourthFormGroup" [completed]="false">
-            <ng-template matStepLabel>Done</ng-template>
-            <div class="done-message-content">
-              <div class="done-message-icon">
-                <mat-icon class="done-icon">done</mat-icon>
-              </div>
-              <div class="done-message-title">
-                Enjoy your appointment!
-              </div>
-              <div class="done-message-subtitle">
-                Check your email for details.
-              </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <button mat-icon-button class="hamburger-button" style="color:black" (click)="sidenav.open()">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <div class="salon-details-main-container">
+      <div class="salon-details-content-container">
+        <div class="salon-details-content">
+          <div class="salon-details-content-header">
+            <div class="salon-details-photo">
+              <img src={{salon.logo}} class="salon-details-image" alt="">
             </div>
-          </mat-step>
-        </mat-stepper>
-      </div>
-      <div class="salon-details-services" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[1]">
-        <app-salon-services></app-salon-services>
-      </div>
-      <div class="salon-details-barbers" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[2]">
-        <app-salon-barbers></app-salon-barbers>
-      </div>
-      <div class="salon-details-description" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[3]">
-        <app-salon-description></app-salon-description>
-      </div>
-      <div class="salon-details-reviews" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[4]">
-        <app-salon-reviews></app-salon-reviews>
+            <div class="salon-details-name">
+              {{salon.name}}
+            </div>
+            <div class="salon-details-rating">
+              {{salon.rating}}
+              <ng-template #t let-fill="fill">
+                <span class="star" [class.full]="fill === 100">
+                  <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                </span>
+              </ng-template>
+              <ngb-rating [(rate)]="salon.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+              ({{reviews.length}} reviews)
+            </div>
+          </div>
+          <div class="salon-details-menu">
+
+            <mat-selection-list #navigation [multiple]="false">
+
+              <mat-list-option [selected]="true" [value]="menuItems[0]">
+                <mat-icon class="salon-details-menu-icon">date_range</mat-icon>{{menuItems[0]}}
+              </mat-list-option>
+              <mat-list-option [value]="menuItems[1]">
+                <mat-icon class="salon-details-menu-icon">view_list</mat-icon>{{menuItems[1]}}
+              </mat-list-option>
+              <mat-list-option [value]="menuItems[2]">
+                <mat-icon class="salon-details-menu-icon">account_circle</mat-icon>{{menuItems[2]}}
+              </mat-list-option>
+              <mat-list-option [value]="menuItems[3]">
+                <mat-icon class="salon-details-menu-icon"> location_on</mat-icon>{{menuItems[3]}}
+              </mat-list-option>
+              <mat-list-option [value]="menuItems[4]">
+                <mat-icon class="salon-details-menu-icon"> reviews_outlined</mat-icon>{{menuItems[4]}}
+              </mat-list-option>
+            </mat-selection-list>
+
+          </div>
+        </div>
+        <div class="salon-details-services-content">
+          <!-- <div class="salon-details-services-header">
+            {{navigation.selectedOptions.selected[0]?.value}}
+          </div> -->
+          <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
+            <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
+              <mat-step [stepControl]="firstFormGroup" label="Service" [completed]="serviceCompleted">
+                <form [formGroup]="firstFormGroup">
+                  <div class="salon-details-service" *ngFor="let service of services">
+                    <button mat-button class="salon-service" matStepperNext>
+                      <div class="button-content" (click)="setServiceId(service.id)">
+                        <div class="button-text">
+                          <div class="service-name">
+                            {{service.serviceName}}
+                          </div>
+                          <div class="service-cost">
+                            {{service.cost}} lei
+                          </div>
+                        </div>
+                        <div class="service-time">
+                          <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
+                        </div>
+                      </div>
+                      <div class="button-forward-icon">
+                        <i class="fas fa-chevron-right" style="color:var(--main-color); font-size: 20px;"></i>
+                      </div>
+                    </button>
+                    <mat-divider></mat-divider>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="secondFormGroup" label="Barber" [completed]="barberCompleted">
+                <form [formGroup]="secondFormGroup">
+                  <div class="salon-details-service" *ngFor="let barber of barbers">
+                    <button mat-button class="salon-service" matStepperNext>
+                      <div class="button-content" (click)="setBarberId(barber.id)">
+                        <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
+                        </div>
+                        <div class="barber-button-text">
+                          <div class="barber-firstname">
+                            {{barber.firstName}}
+                          </div>
+                          <div class="barber-lastname">
+                            {{barber.lastName}}
+                          </div>
+                        </div>
+                      </div>
+                      <div class="button-forward-icon">
+                        <i class="fas fa-chevron-right" style="color:var(--main-color); font-size: 20px;"></i>
+                      </div>
+                    </button>
+                    <mat-divider></mat-divider>
+                  </div>
+                  <div>
+                    <button mat-button matStepperPrevious class="back-button">Back</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="thirdFormGroup" label="Date" [editable]=""
+                [completed]="bookingDateCompleted">
+                <form [formGroup]="thirdFormGroup">
+                  <div class="calendar-form">
+                    <mat-card class="demo-inline-calendar-card">
+                      <mat-calendar [(selected)]="selected" [minDate]="minDate" [maxDate]="maxDate"></mat-calendar>
+                    </mat-card>
+                    <div class="hours-available" *ngIf="selected != null">
+                      <button mat-button class="mat-chip" *ngFor="let time of availableTimes" matStepperNext>
+                        <div class="button-time-text" *ngIf="time.minute == 0" (click)="setTimeToDate(time)">
+                          {{time.hour}}:{{time.minute}}0
+                        </div>
+                        <div class="button-time-text" *ngIf="time.minute != 0" (click)="setTimeToDate(time)">
+                          {{time.hour}}:{{time.minute}}
+                        </div>
+                      </button>
+                    </div>
+                  </div>
+                  <div>
+                    <button mat-button matStepperPrevious>Back</button>
+                  </div>
+                </form>
+              </mat-step>
+              <mat-step [stepControl]="fourthFormGroup" [completed]="false">
+                <ng-template matStepLabel>Done</ng-template>
+                <div class="done-message-content">
+                  <div class="done-message-icon">
+                    <mat-icon class="done-icon">done</mat-icon>
+                  </div>
+                  <div class="done-message-title">
+                    Enjoy your appointment!
+                  </div>
+                  <div class="done-message-subtitle">
+                    Check your email for details.
+                  </div>
+                </div>
+              </mat-step>
+            </mat-stepper>
+          </div>
+          <div class="salon-details-services" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[1]">
+            <app-salon-services></app-salon-services>
+          </div>
+          <div class="salon-details-barbers" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[2]">
+            <app-salon-barbers></app-salon-barbers>
+          </div>
+          <div class="salon-details-description" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[3]">
+            <app-salon-description></app-salon-description>
+          </div>
+          <div class="salon-details-reviews" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[4]">
+            <app-salon-reviews></app-salon-reviews>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

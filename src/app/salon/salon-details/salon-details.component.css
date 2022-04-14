@@ -4,6 +4,10 @@
   background-color: rgba(255, 255, 255, 0.768);
 }
 
+.hamburger-button{
+  display:none;
+}
+
 .salon-details-content-container {
   width: 70%;
   display: flex;
@@ -73,6 +77,12 @@
   margin: auto;
 }
 
+
+.salon-details-sidenav-menu {
+  width: 100%;
+  margin: auto;
+}
+
 :host /deep/ .mat-list-text {
   display: flex !important;
   flex-direction: row !important;
@@ -138,6 +148,7 @@
   padding: 1rem;
   align-items: center;
   display: flex;
+  color:black;
 }
 
 :host /deep/ .mat-button-wrapper {
@@ -226,6 +237,10 @@
   padding: 0 0 24px 0 !important;
 }
 
+:host /deep/ .mat-vertical-content {
+  padding: 0 0 24px 0 !important;
+}
+
 .mat-stepper-horizontal {
   background-color: white;
 }
@@ -277,6 +292,7 @@
 }
 
 .back-button {
+  color: gray;
   margin-top: 1rem;
   transition: 0.5s;
 }
@@ -402,6 +418,7 @@
   justify-content: center;
   flex-direction: column;
   align-items: center;
+  color:black;
 }
 
 .done-message-icon {
@@ -436,3 +453,75 @@
   color: white;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
+
+@media screen and (max-width: 426px) {
+  .salon-details-content{
+    display:none;
+  }
+  .hamburger-button{
+    display:flex;
+    margin-left:2rem;
+    margin-top: 1rem;
+  }
+  .salon-details-content-container{
+    flex-direction: column;
+    align-items: center;
+  }
+  .salon-details-services-content{
+    width:100%;
+    box-shadow: none;
+  }
+}
+
+@media screen and (max-width: 769px) {
+  .salon-details-content-container{
+    width: 90%;
+    margin-top:0;
+  }
+  .demo-inline-calendar-card {
+    width: 100%;
+  }
+  .calendar-form {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hours-available{
+    margin-top:1rem;
+  }
+}
+
+
+@media screen and (min-width: 426px) {
+  .salon-details-sidenav-menu{
+    display:none;
+  }
+}
+
+.mat-drawer{
+  width:80%;
+  background-color:white;
+  color:black;
+}
+
+.mat-nav-list{
+  display:flex;
+  flex-direction: column;
+}
+
+.mat-drawer-container{
+  /* position: absolute;
+  height:80%;
+  width:100%;
+  top:120px;
+  left:0;
+  overflow:none;
+  background-color: rgba(255, 255, 255, 0); */
+  position: absolute;
+  top: 120px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: rgba(255, 255, 255, 0);
+}
+
+

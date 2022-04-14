@@ -24,6 +24,23 @@ export interface serviceTime {
 })
 export class SalonDetailsComponent implements OnInit {
 
+  boo:boolean = true;
+
+  opened=false;
+
+  constructor(
+    private route: ActivatedRoute,
+    private salonService: SalonService,
+    private _formBuilder: FormBuilder,
+    breakpointObserver: BreakpointObserver,
+    private alertService: AlertService,
+  ) {
+    this.stepperOrientation = breakpointObserver
+    .observe('(min-width: 800px)')
+    .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+  }
+
+
   salon: Salon = {
     id: 0,
     name: "",
@@ -93,18 +110,6 @@ export class SalonDetailsComponent implements OnInit {
   stepperOrientation: Observable<StepperOrientation>;
 
   selected: Date | null = null;
-
-  constructor(
-    private route: ActivatedRoute,
-    private salonService: SalonService,
-    private _formBuilder: FormBuilder,
-    breakpointObserver: BreakpointObserver,
-    private alertService: AlertService
-  ) {
-    this.stepperOrientation = breakpointObserver
-      .observe('(min-width: 800px)')
-      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
-  }
 
   ngOnInit(): void {
 

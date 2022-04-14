@@ -51,3 +51,9 @@
 :ng-deep .mat-dialog-container{
   background:white !important;
 } 
+
+@media screen and (max-width: 426px) {
+  :ng-deep .mat-dialog-container{
+    width: 100%;
+  } 
+}

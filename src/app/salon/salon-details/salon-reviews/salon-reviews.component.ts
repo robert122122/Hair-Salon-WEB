@@ -7,6 +7,8 @@ import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
 import { DatePipe } from '@angular/common';
+import { HostListener } from "@angular/core";
+
 
 export interface DialogData {
   salonId: number;
@@ -25,6 +27,8 @@ export class SalonReviewsComponent implements OnInit {
 
   value = '';
 
+  mobWidth: any;
+
   sortingOptions = ["DateAdded Asc", "DateAdded Desc", "Rating Asc", "Rating Desc"];
 
   selectedSort: any;
@@ -35,11 +39,14 @@ export class SalonReviewsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private salonService: SalonService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog) {
+    this.mobWidth = (window.screen.width) + "px";
+    console.log(this.mobWidth)
+  }
 
   openDialog(): void {
     let dialogRef = this.dialog.open(AddReviewDialogComponent, {
-      width: '40%',
+      width: this.mobWidth,
       data: { salonId: this.salonId },
     });
 

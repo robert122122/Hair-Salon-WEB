@@ -1,6 +1,7 @@
 .salon-details-service {
   transition: 0.5s;
   align-items: center;
+  color:black;
 }
 
 .salon-details-service:hover {
