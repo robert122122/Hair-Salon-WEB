@@ -20,26 +20,26 @@
       </div>
       <div class="caption-steps-content">
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="First Name" />
+          <input #searchBox id="search-box" [(ngModel)]="userRegistration.firstName" placeholder="First Name" />
         </div>
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="Last Name" />
+          <input #searchBox id="search-box" [(ngModel)]="userRegistration.lastName" placeholder="Last Name" />
         </div>
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="Phone Number" />
+          <input #searchBox id="search-box" [(ngModel)]="userRegistration.phoneNumber" placeholder="Phone Number" />
         </div>
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="Email" />
+          <input #searchBox id="search-box" [(ngModel)]="userRegistration.email" placeholder="Email" />
         </div>
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="Password" />
+          <input #searchBox id="search-box" [(ngModel)]="userRegistration.password" placeholder="Password" />
         </div>
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="Confirm Password" />
+          <input #searchBox id="search-box" [(ngModel)]="confirmedPassword" placeholder="Confirm Password" />
         </div>
       </div>
       <div class="caption-button">
-        <button mat-raised-button class="schedule-button" routerLink="/login" (click)="register()">Confirm</button>
+        <button mat-raised-button class="schedule-button" (click)="register()">Confirm</button>
       </div>
     </div>
   </div>
