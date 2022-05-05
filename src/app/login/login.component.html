@@ -20,10 +20,10 @@
       </div>
       <div class="caption-steps-content">
         <div class="caption-step-one">
-          <input #searchBox id="search-box" placeholder="email" />
+          <input #searchBox id="search-box" [(ngModel)]="loginRequest.email" placeholder="email" required/>
         </div>
         <div class="caption-step-two">
-          <input #searchBox id="search-box" placeholder="password" />
+          <input #searchBox id="search-box" [(ngModel)]="loginRequest.password" placeholder="password" required/>
         </div>
         <div class="caption-step-question">
           <div class="create-account-link" routerLink="/register">
@@ -32,7 +32,7 @@
         </div>
       </div>
       <div class="caption-button">
-        <button mat-raised-button class="schedule-button" routerLink="/salons" (click)="login()">Login</button>
+        <button mat-raised-button class="schedule-button" type="submit" (click)="login()">Login</button>
       </div>
     </div>
   </div>

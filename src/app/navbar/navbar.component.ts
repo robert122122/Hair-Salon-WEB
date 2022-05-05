@@ -1,6 +1,7 @@
 import { MediaMatcher } from '@angular/cdk/layout';
 import { DOCUMENT } from '@angular/common';
 import {ChangeDetectorRef, Component, HostListener, Inject, OnDestroy, OnInit } from '@angular/core';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Component({
   selector: 'app-navbar',
@@ -16,6 +17,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     changeDetectorRef: ChangeDetectorRef,
     media: MediaMatcher,
+    private jwtHelper: JwtHelperService,
     @Inject(DOCUMENT) private document: Document
   ) {
     this.mobileQuery = media.matchMedia('(max-width: 769px)');
@@ -47,6 +49,17 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+  }
+
+  isUserAuthenticated = (): boolean => {
+    const token = localStorage.getItem("jwt");
+    if (token && !this.jwtHelper.isTokenExpired(token)){
+      return true;
+    }
+    return false;
+  }
+  logOut = () => {
+    localStorage.removeItem("jwt");
   }
 
 }

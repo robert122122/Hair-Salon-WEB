@@ -7,6 +7,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
+import { JwtModule } from '@auth0/angular-jwt';
+import { AuthGuard } from './guards/auth.guard';
+
+export function tokenGetter() { 
+  return localStorage.getItem("jwt"); 
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,9 +25,16 @@ import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
     BrowserAnimationsModule,
     NavbarModule,
     FormsModule,
+    JwtModule.forRoot({
+      config: {
+        tokenGetter: tokenGetter,
+        allowedDomains: ["localhost:4200"],
+        disallowedRoutes: []
+      }
+    }),
     HttpClientModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

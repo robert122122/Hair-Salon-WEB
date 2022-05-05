@@ -54,6 +54,11 @@
   text-align: center;
   font-size: 25px;
   padding: 0.5rem;
+  color:black;
+}
+
+.salon-details-rating{
+  color:black;
 }
 
 .star {

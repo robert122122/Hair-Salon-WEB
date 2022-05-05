@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './guards/auth.guard';
 
 const routes: Routes = [
   {
     path: 'salons',
-    loadChildren: () => import("./salon/salon.module").then(m => m.SalonsModule)
+    loadChildren: () => import("./salon/salon.module").then(m => m.SalonsModule),
   },
   {
     path: '',
@@ -17,6 +18,11 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import("./register/register.module").then(m => m.RegisterModule)
+  },
+  {
+    path: 'settings',
+    loadChildren: () => import("./user-settings/user-settings.module").then(m => m.UserSettingsModule),
+    canActivate:[AuthGuard]
   },
   {
     path: '**',

@@ -1,0 +1,43 @@
+.user-settings-main-container{
+    width:70%;
+    display: flex;
+    margin:auto;
+    padding-top: 2rem;
+}
+
+:host /deep/ .mat-tab-group {
+    flex-direction: row;
+    width: 100%;
+}
+
+:host /deep/ .mat-tab-label{
+    color:black;
+    transition: all 0.3s ease-in-out;
+}
+
+:host /deep/ .mat-tab-label-active{
+    color:var(--main-color);
+}
+
+:host /deep/ .mat-tab-label:hover{
+    background-color: rgba(208, 204, 204, 0.544);
+}
+
+:host /deep/ .mat-tab-labels{
+    flex-direction: column;
+}
+
+:host /deep/ .mat-tab-header{
+    width: 20%;
+}
+
+:host /deep/ .mat-tab-body-wrapper{
+    width: 100%;
+    margin-left: 2rem;;
+    box-shadow: rgba(0, 0, 0, 0.24) 10px 10px 10px -10px;
+}
+
+:host /deep/ .mat-ink-bar{
+    width:0px !important;
+    background-color: var(--main-color) !important;
+}

@@ -19,6 +19,7 @@ h1 {
 .show-navbar-toolbar{
   background-color: white;
   color:black;
+  height: 70px;
 }
 
 .scrolled-navbar-item a{
@@ -172,6 +173,10 @@ nav a.active {
 
 .mobile-navbar-content {
   display: none;
+}
+
+:host /deep/ .mat-menu-item {
+  background-color:white !important;
 }
 
 @media screen and (max-width: 769px) {

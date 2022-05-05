@@ -41,4 +41,8 @@ export class SalonService {
   addReview(review: ReviewPost): Observable<ReviewPost> {
     return this.httpService.post<ReviewPost>('https://localhost:44396/api/Review', review);
   }
+
+  getBookingsByUser(userId: number): Observable<Booking[]>{
+    return this.httpService.get<Booking[]>(`https://localhost:44396/api/Booking/User/${userId}`);
+  }
 }
