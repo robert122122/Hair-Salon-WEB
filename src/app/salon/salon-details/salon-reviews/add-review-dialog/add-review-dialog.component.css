@@ -19,6 +19,10 @@
     height: 100%;
 }
 
+:host /deep/ .cdk-overlay-pane {
+  justify-content:center;
+}
+
 :host /deep/ .mat-dialog-content { 
     display: flex;
     flex-direction: column;
@@ -48,8 +52,9 @@
   box-shadow: none;
 }
 
-:ng-deep .mat-dialog-container{
+:host /deep/ .mat-dialog-container{
   background:white !important;
+  width:50% !important;
 } 
 
 @media screen and (max-width: 426px) {

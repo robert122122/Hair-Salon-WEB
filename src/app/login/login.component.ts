@@ -1,8 +1,9 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 import { AlertService } from '../alert.service';
-import { LoginRequest, LoginResponse } from './login';
+import { LoginRequest, LoginResponse, User } from './login';
 import { LoginService } from './login.service';
 
 @Component({
@@ -18,6 +19,16 @@ export class LoginComponent implements OnInit {
     email: "",
     password: ""
   }
+
+  private userLoggedInSubject$ = new BehaviorSubject<User>({
+    id:0,
+    firstName:"",
+    lastName:"",
+    email:"",
+    token:""
+  });
+
+  user = this.userLoggedInSubject$.asObservable();
 
   constructor(private alertService: AlertService,
     private loginService: LoginService,

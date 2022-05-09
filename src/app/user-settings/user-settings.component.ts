@@ -17,11 +17,9 @@ export class UserSettingsComponent implements OnInit {
   constructor(private salonService: SalonService) { }
 
   ngOnInit(): void {
-    this.salonService.getBookingsByUserWithDetails(4).subscribe((bookings: BookingGet[]) =>{
+    this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) =>{
       this.bookings = bookings;
       this.dataSource = this.bookings;
-
-      console.log(bookings);
     })
   }
 

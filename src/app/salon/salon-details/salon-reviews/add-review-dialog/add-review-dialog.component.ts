@@ -36,8 +36,7 @@ export class AddReviewDialogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-
-    this.newReview.userId = 2;
+    this.newReview.userId = parseInt(localStorage.getItem('userId')!);
   }
 
   addReview(): void {
