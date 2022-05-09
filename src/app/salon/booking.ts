@@ -6,6 +6,16 @@ export interface Booking {
     userId:number
 }
 
+export interface BookingGet {
+    id:number,
+    salon: string,
+    service: string,
+    barber: string,
+    bookingDate:Date,
+    userId:number
+}
+
+
 export interface BookingResponse{
     id:number,
     salonId: number,

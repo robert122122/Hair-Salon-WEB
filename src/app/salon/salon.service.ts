@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
 import { Barber } from './salon-details/salon-barbers/barber';
-import { Booking, BookingResponse } from './booking';
+import { Booking, BookingGet, BookingResponse } from './booking';
 import { Review, ReviewPost } from './salon-details/review';
 import { Salon } from './salons/salon';
 import { Service } from './salon-details/salon-services/service';
@@ -44,5 +44,9 @@ export class SalonService {
 
   getBookingsByUser(userId: number): Observable<Booking[]>{
     return this.httpService.get<Booking[]>(`https://localhost:44396/api/Booking/User/${userId}`);
+  }
+
+  getBookingsByUserWithDetails(userId: number): Observable<BookingGet[]>{
+    return this.httpService.get<BookingGet[]>(`https://localhost:44396/api/Booking/User/${userId}`);
   }
 }

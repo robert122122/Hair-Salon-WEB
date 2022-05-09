@@ -34,7 +34,9 @@ export class LoginComponent implements OnInit {
     this.loginService.login(this.loginRequest).subscribe({
       next: (response: LoginResponse) => {
         const token = response.token;
+        const id = response.id.toString();
         localStorage.setItem("jwt", token);
+        localStorage.setItem("userId", id);
         this.invalidLogin = false;
         this.router.navigate(["/salons"]);
       },
@@ -46,8 +48,3 @@ export class LoginComponent implements OnInit {
   }
 }
 
-// this.loginService.login(this.loginRequest).subscribe((data:LoginResponse) => {
-//   this.alertService.alertSuccess("Succesfully logged in!")
-//   this.router.navigate(['/salons']);
-//   console.log(data.token)
-// }, (err:HttpErrorResponse) => {this.alertService.alertError(err.error.message)})

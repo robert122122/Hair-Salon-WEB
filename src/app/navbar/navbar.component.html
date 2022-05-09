@@ -3,7 +3,7 @@
     <mat-icon style="color:black">content_cut</mat-icon>
     <span class="navbar-title" routerLink="/">Hair Appointments</span>
     <nav class="navbar-content" [ngClass]="{'scrolled-navbar-item': windowScrolled}">
-      <a class="navbar-item" routerLink="/salons" >Salons</a>
+      <a class="navbar-item" routerLink="/salons">Salons</a>
       <a class="navbar-item" [matMenuTriggerFor]="menu">
         <mat-icon>account_circle</mat-icon>
       </a>
@@ -39,7 +39,11 @@
     [fixedInViewport]="mobileQuery.matches" fixedTopGap="120">
     <mat-nav-list class="sidenav-items">
       <a class="sidenav-dashboard" routerLink="/salons">Salons</a>
-      <a class="sidenav-dashboard" routerLink="/login">My Account</a>
+      <a class="sidenav-dashboard" routerLink="/settings">My Account</a>
+      <a class="sidenav-dashboard" *ngIf="!isUserAuthenticated()" routerLink="/login">Login
+      </a>
+      <a class="sidenav-dashboard" *ngIf="isUserAuthenticated()" (click)="logOut()" routerLink="/">Logout
+      </a>
     </mat-nav-list>
   </mat-sidenav>
 </mat-sidenav-container>

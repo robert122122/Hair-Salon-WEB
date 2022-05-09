@@ -24,9 +24,9 @@ export interface serviceTime {
 })
 export class SalonDetailsComponent implements OnInit {
 
-  boo:boolean = true;
+  boo: boolean = true;
 
-  opened=false;
+  opened = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,8 +36,8 @@ export class SalonDetailsComponent implements OnInit {
     private alertService: AlertService,
   ) {
     this.stepperOrientation = breakpointObserver
-    .observe('(min-width: 800px)')
-    .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
+      .observe('(min-width: 800px)')
+      .pipe(map(({ matches }) => (matches ? 'horizontal' : 'vertical')));
   }
 
 
@@ -64,7 +64,7 @@ export class SalonDetailsComponent implements OnInit {
     serviceId: 0,
     barberId: 0,
     bookingDate: new Date(),
-    userId: 2
+    userId: 4
   }
 
   minDate: Date = new Date();
@@ -147,6 +147,10 @@ export class SalonDetailsComponent implements OnInit {
     });
 
     this.booking.salonId = id;
+    if (localStorage.getItem("userId") != null) {
+      const x = localStorage.getItem('userId');
+    }
+
 
   }
 
@@ -174,7 +178,7 @@ export class SalonDetailsComponent implements OnInit {
 
     this.setBookingDate();
 
-    
+
     this.bookingDateCompleted = true;
 
     setTimeout(() => {                           // <<<---using ()=> syntax

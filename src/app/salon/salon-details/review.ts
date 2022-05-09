@@ -1,7 +1,7 @@
 export interface Review {
     id: number,
     salonId: number,
-    userId: number,
+    userName: string,
     rating: number,
     dateAdded: Date,
     dateUpdated: Date,

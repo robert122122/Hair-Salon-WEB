@@ -12,9 +12,4 @@ export class LoginService {
 
   login(loginRequest: LoginRequest) {
     return this.httpService.post<LoginResponse>(`https://localhost:44396/api/User/authenticate`, loginRequest)}
-
-
 }
-
-
-

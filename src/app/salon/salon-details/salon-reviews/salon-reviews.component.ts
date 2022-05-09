@@ -63,6 +63,7 @@ export class SalonReviewsComponent implements OnInit {
 
     this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
+      console.log(reviews);
     })
 
   }
