@@ -64,7 +64,7 @@ export class SalonDetailsComponent implements OnInit {
     serviceId: 0,
     barberId: 0,
     bookingDate: new Date(),
-    userId: 4
+    userId: parseInt(localStorage.getItem('userId')!)
   }
 
   minDate: Date = new Date();
