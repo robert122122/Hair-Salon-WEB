@@ -21,6 +21,18 @@ export class SalonsComponent implements OnInit {
   panelOpenState = false;
 
   isSearch = false;
+  step = 0;
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
 
   value = '';
 

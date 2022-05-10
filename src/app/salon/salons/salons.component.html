@@ -4,7 +4,7 @@
       <div class="salon-filters">
         <div class="filters-accordeons">
           <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true"  >
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   City
@@ -20,7 +20,7 @@
           </mat-accordion>
           <mat-divider></mat-divider>
           <mat-accordion>
-            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
+            <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false" [expanded]="true">
               <mat-expansion-panel-header>
                 <mat-panel-title>
                   Rating
