@@ -282,3 +282,19 @@
   background-color: white !important;
   color: gray !important;
 }
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 1rem;
+  color: #d3d3d3;
+}
+.full {
+  color: var(--main-color);
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: var(--main-color);
+}

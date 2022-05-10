@@ -14,6 +14,10 @@ export class SalonsComponent implements OnInit {
   constructor(private salonService: SalonService) { }
 
 
+  ratingNumbers: number[] = [1,2,3,4,5];
+
+  selectedRatings: number[] =[];
+
   panelOpenState = false;
 
   isSearch = false;
@@ -69,6 +73,21 @@ export class SalonsComponent implements OnInit {
     else {
       this.selectedCities.splice(x, 1);
       console.log(this.selectedCities);
+    }
+  }
+
+  handleSelectedRating(rating: number): any {
+    var x = this.selectedRatings.findIndex(y => y === rating);
+    console.log(x);
+    console.log(this.selectedRatings.findIndex(y => y === rating));
+
+    if (x == -1) {
+      this.selectedRatings.push(rating);
+      console.log(this.selectedRatings);
+    }
+    else {
+      this.selectedRatings.splice(x, 1);
+      console.log(this.selectedRatings);
     }
   }
 

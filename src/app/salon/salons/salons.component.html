@@ -26,14 +26,19 @@
                   Rating
                 </mat-panel-title>
               </mat-expansion-panel-header>
-              <mat-selection-list #cities>
-                <mat-list-option *ngFor="let city of salonsCities" (click)="handleSelectedCity(city)">
-                  {{city}}
+              <mat-selection-list #ratings>
+                <mat-list-option *ngFor="let rating of ratingNumbers" (click)="handleSelectedRating(rating)">
+                  <ng-template #t let-fill="fill">
+                    <span class="star" [class.full]="fill === 100">
+                      <span class="half" [style.width.%]="fill">&#9733;</span>&#9733;
+                    </span>
+                  </ng-template>
+                  <ngb-rating [(rate)]="ratingNumbers[rating]" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                   <mat-divider></mat-divider>
                 </mat-list-option>
               </mat-selection-list>
             </mat-expansion-panel>
-          </mat-accordion>
+          </mat-accordion> 
         </div>
       </div>
     </div>
@@ -61,7 +66,7 @@
             </mat-form-field>
           </div>
         </div>
-        <div class="filters-applied" *ngIf="selectedCities.length > 0">
+        <div class="filters-applied" *ngIf="selectedCities.length > 0 || selectedRatings.length > 0">
           <div class="filters-aplied-title">
             Filters:
           </div>
@@ -69,6 +74,9 @@
             <mat-chip-list aria-label="City selection">
               <mat-chip *ngFor="let city of selectedCities">
                 {{city}}
+              </mat-chip>
+              <mat-chip *ngFor="let rating of selectedRatings">
+                {{rating}} stars
               </mat-chip>
             </mat-chip-list>
           </div>
