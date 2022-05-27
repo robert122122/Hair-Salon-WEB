@@ -1,7 +1,11 @@
 import { DatePipe } from '@angular/common';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Booking, BookingGet } from '../salon/booking';
 import { SalonService } from '../salon/salon.service';
+import { UserService } from '../user.service';
+import { User } from './user';
 
 @Component({
   selector: 'app-user-settings',
@@ -12,14 +16,27 @@ export class UserSettingsComponent implements OnInit {
 
   bookings: BookingGet [] = [];
 
+  user: User = {
+    firstName: '',
+    lastName: '',
+    phoneNumber:'',
+    email: '',
+    password: '',
+    image: '',
+  };
+
   pipe = new DatePipe('en-US');
 
-  constructor(private salonService: SalonService) { }
+  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient) { }
 
   ngOnInit(): void {
     this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) =>{
       this.bookings = bookings;
       this.dataSource = this.bookings;
+    })
+
+    this.userService.getUserDetails(parseInt(localStorage.getItem('userId')!)).subscribe((user: User) => {
+      this.user = user;
     })
   }
 

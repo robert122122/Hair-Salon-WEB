@@ -60,6 +60,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
   }
   logOut = () => {
     localStorage.removeItem("jwt");
+    localStorage.removeItem("userId");
   }
 
 }

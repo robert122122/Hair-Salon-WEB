@@ -59,7 +59,7 @@ nav a {
   height: 100%;
   text-decoration: none;
   color:white;
-
+  cursor: pointer;
   display: flex;
   align-items: center;
   font-weight: 100;
@@ -74,7 +74,6 @@ nav a.active {
 }
 
 .navbar-item:hover {
-  /* background-color:#bababa11; */
   border-bottom: 3px solid var(--main-color);
   margin-bottom: -1px;
 }

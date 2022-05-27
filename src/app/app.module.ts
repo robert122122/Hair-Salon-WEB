@@ -7,8 +7,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
-import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './guards/auth.guard';
+import { JwtModule } from '@auth0/angular-jwt';
 
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 

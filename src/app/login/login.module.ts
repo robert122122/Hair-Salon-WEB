@@ -8,8 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { LoginComponent } from './login.component';
 
-
-
 @NgModule({
   declarations: [
     LoginComponent
