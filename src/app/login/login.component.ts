@@ -33,10 +33,7 @@ export class LoginComponent implements OnInit {
   images = ["https://images.squarespace-cdn.com/content/v1/5edee990a8696a7b8618fe6d/1592794368345-KP26O2DQ6O0SR8N0KOTN/DomMiguelPhotography6164+copy.jpg?format=2500w", "https://drive.google.com/uc?export=view&id=1W2Xr0IjbY2ptQ1NSQTgHmhWgLFIGnlBn", "https://drive.google.com/uc?export=view&id=1yPSclIuTaFqgTPNuUN-s5APXNlqVMutd"];
 
   login() {
-    this.httpService.post<LoginResponse>("https://localhost:44396/api/authenticate/login", this.loginRequest, {
-      headers: new HttpHeaders({ "Content-Type": "application/json"})
-    })
-    .subscribe({
+    this.loginService.login(this.loginRequest).subscribe({
       next: (response: LoginResponse) => {
         const token = response.token;
         localStorage.setItem("jwt", token); 
@@ -48,23 +45,21 @@ export class LoginComponent implements OnInit {
       error: (err: HttpErrorResponse) => this.invalidLogin = true
     })
 
-    console.log(localStorage.getItem('jwt'));
-
-
-    // this.loginService.login(this.loginRequest).subscribe({
+    // this.httpService.post<LoginResponse>("https://localhost:44396/api/authenticate/login", this.loginRequest, {
+    //   headers: new HttpHeaders({ "Content-Type": "application/json"})
+    // })
+    // .subscribe({
     //   next: (response: LoginResponse) => {
     //     const token = response.token;
-    //     const id = response.id.toString();
-    //     localStorage.setItem("jwt", token);
-    //     localStorage.setItem("userId", id);
-    //     this.invalidLogin = false;
+    //     localStorage.setItem("jwt", token); 
+    //     localStorage.setItem("userId", response.id.toString());
+
+    //     this.invalidLogin = false; 
     //     this.router.navigate(["/salons"]);
     //   },
-    //   error: (err: HttpErrorResponse) => {
-    //     this.invalidLogin = true;
-    //     this.alertService.alertError(err.error.message);
-    //   }
+    //   error: (err: HttpErrorResponse) => this.invalidLogin = true
     // })
+
   }
 }
 

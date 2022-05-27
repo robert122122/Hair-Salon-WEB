@@ -23,7 +23,7 @@
           <input #searchBox id="search-box" [(ngModel)]="loginRequest.email" placeholder="email" required/>
         </div>
         <div class="caption-step-two">
-          <input #searchBox id="search-box" [(ngModel)]="loginRequest.password" placeholder="password" required/>
+          <input #searchBox id="search-box" type="password" [(ngModel)]="loginRequest.password" placeholder="password" required/>
         </div>
         <div class="caption-step-question">
           <div class="create-account-link" routerLink="/register">
