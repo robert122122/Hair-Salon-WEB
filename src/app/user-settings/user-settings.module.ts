@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserSettingsComponent } from './user-settings.component';
+import { UploadComponent } from '../upload/upload.component';
 
 
 @NgModule({
   declarations: [
-    UserSettingsComponent
+    UserSettingsComponent,
+    UploadComponent
   ],
   imports: [
     CommonModule,

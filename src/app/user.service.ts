@@ -10,7 +10,7 @@ export class UserService {
 
   constructor(private httpService: HttpClient) { }
 
-  getUserDetails(userId: number): Observable<User> {
+  getUserDetails(): Observable<User> {
 
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
@@ -19,8 +19,8 @@ export class UserService {
     return this.httpService.get<User>(`https://localhost:44396/api/User/${parseInt(localStorage.getItem('userId')!)}`, {headers: headers});
   }
 
-  updateUser(userId: number, updatedUser: User): Observable<User>{
-    return this.httpService.put<User>(`https://localhost:44396/api/User/${userId}`, updatedUser);
+  updateUser(updatedUser: User): Observable<User>{
+    return this.httpService.put<User>(`https://localhost:44396/api/User/${parseInt(localStorage.getItem('userId')!)}`, updatedUser);
   }
   
 }

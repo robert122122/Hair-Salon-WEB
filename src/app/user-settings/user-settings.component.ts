@@ -1,7 +1,9 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { FormControl, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
+import { AlertService } from '../alert.service';
 import { Booking, BookingGet } from '../salon/booking';
 import { SalonService } from '../salon/salon.service';
 import { UserService } from '../user.service';
@@ -14,30 +16,79 @@ import { User } from './user';
 })
 export class UserSettingsComponent implements OnInit {
 
-  bookings: BookingGet [] = [];
+  isCreate: boolean = true;
 
   user: User = {
     firstName: '',
     lastName: '',
     phoneNumber:'',
     email: '',
-    password: '',
     image: '',
   };
 
+  response!: { dbPath: ''; };
+
+  emailFormControl = new FormControl('', [Validators.required, Validators.email]);
+  firstnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
+  lastnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
+  phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]);
+
+  disabledButton: boolean = false;
+
+  bookings: BookingGet [] = [];
+
   pipe = new DatePipe('en-US');
 
-  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient) { }
+  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient, private alertService: AlertService) { }
 
   ngOnInit(): void {
+    this.isCreate = true;
+
+    console.log(this.response);
+
     this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) =>{
       this.bookings = bookings;
       this.dataSource = this.bookings;
     })
 
-    this.userService.getUserDetails(parseInt(localStorage.getItem('userId')!)).subscribe((user: User) => {
+    this.userService.getUserDetails().subscribe((user: User) => {
       this.user = user;
+      console.log(user);
     })
+  }
+
+  updateUser() {
+    this.user.image = this.response.dbPath;
+    console.log(this.response.dbPath);
+    this.userService.updateUser(this.user).subscribe({
+      next: _ => {
+        this.alertService.alertSuccess("User updated succesfully!");
+        this.isCreate = false;
+      },
+      error: (err: HttpErrorResponse) => console.log(err)
+    });
+  }
+
+  returnToUpdate = () => {
+    this.isCreate = true;
+  }
+
+  uploadFinished = (event:any) => { 
+    this.response = event; 
+    this.checkFormControls();
+  }
+
+  public createImgPath = (serverPath: string) => { 
+    return `https://localhost:44396/${serverPath}`; 
+  }
+
+  checkFormControls(): void {
+
+    if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null || this.firstnameFormControl.errors != null || this.response == undefined) {
+      this.disabledButton = true;
+      return;
+    }
+    this.disabledButton = false;
   }
 
   columns = [

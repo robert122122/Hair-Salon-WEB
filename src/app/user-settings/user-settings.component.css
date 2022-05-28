@@ -9,6 +9,55 @@
   width: 100%;
 }
 
+.example-form {
+  width: 100%;
+}
+
+.mat-divider {
+  border-top-color: rgb(225, 225, 225);
+}
+
+.user-account-details {
+  padding: 1rem;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.caption-button {
+  display: flex;
+  justify-content: center;
+  padding: 0.5em;
+}
+
+.schedule-button {
+  width: 80%;
+}
+
+:host /deep/ .mat-raised-button.mat-button-disabled.mat-button-disabled{
+  background-color: gray !important;
+}
+
+.schedule-button:hover{
+  background-color: gray;
+}
+
+:host /deep/ .mat-form-field-flex {
+  background: rgb(247, 247, 247);
+}
+
+:host /deep/ .mat-tab-label-container {
+  border-right: 1px solid rgb(225, 225, 225) !important;
+}
+
+:host /deep/ .mat-form-field-label {
+  color: var(--main-color) !important;
+}
+
+.example-full-width {
+  width: 100%;
+}
+
 :host /deep/ .mat-table {
   background: white !important;
 }

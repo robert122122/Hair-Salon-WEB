@@ -1,4 +1,5 @@
 <div class="user-settings-main-container">
+  <img [src]="createImgPath(user.image)" alt="profile picture" style="width:60px; height:60px;">
   <mat-tab-group headerPosition="above" bodyOriginState="right">
     <mat-tab label="History">
       <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
@@ -10,16 +11,82 @@
             {{column.cell(row)}}
           </td>
         </ng-container>
-      
+
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
       </table>
-      
+
     </mat-tab>
-    <mat-tab label="Settings"> 
+    <mat-tab label="Settings">
       <div class="user-settings-container">
         <div class="user-account-details">
-          
+          <form class="example-form">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>FirstName</mat-label>
+              <input type="string" matInput [formControl]="firstnameFormControl" [(ngModel)]="user.firstName"
+                (ngModelChange)="checkFormControls()" placeholder="John">
+              <mat-error
+                *ngIf="(firstnameFormControl.hasError('minlength') || firstnameFormControl.hasError('maxlength')) && !firstnameFormControl.hasError('required')">
+                Please enter a valid name
+              </mat-error>
+              <mat-error *ngIf="firstnameFormControl.hasError('required')">
+                First name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>LastName</mat-label>
+              <input type="string" matInput [formControl]="lastnameFormControl" [(ngModel)]="user.lastName"
+                (ngModelChange)="checkFormControls()" placeholder="Doe">
+              <mat-error
+                *ngIf="(lastnameFormControl.hasError('minlength') || lastnameFormControl.hasError('maxlength')) && !lastnameFormControl.hasError('required')">
+                Please enter a valid name
+              </mat-error>
+              <mat-error *ngIf="lastnameFormControl.hasError('required')">
+                Last name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="user.email"
+                (ngModelChange)="checkFormControls()" placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input type="string" matInput [formControl]="phonenumberFormControl" [(ngModel)]="user.phoneNumber"
+                (ngModelChange)="checkFormControls()" placeholder="0747652147">
+              <mat-error
+                *ngIf="(phonenumberFormControl.hasError('minlength') || phonenumberFormControl.hasError('maxlength')) && !phonenumberFormControl.hasError('required')">
+                Please enter a valid phone number
+              </mat-error>
+              <mat-error *ngIf="phonenumberFormControl.hasError('required')">
+                Phone number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input type="file" matInput [formControl]="phonenumberFormControl" [(ngModel)]="user.image"
+                (ngModelChange)="checkFormControls()" placeholder="0747652147">
+            </mat-form-field> -->
+            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
+          </form>
+          <div class="caption-button">
+            <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"
+              (click)="updateUser()">Save</button>
+          </div>
         </div>
       </div>
     </mat-tab>
