@@ -12,6 +12,7 @@ import { SalonBarbersComponent } from './salon-details/salon-barbers/salon-barbe
 import { SalonDescriptionComponent } from './salon-details/salon-description/salon-description.component';
 import { SalonReviewsComponent } from './salon-details/salon-reviews/salon-reviews.component';
 import { AddReviewDialogComponent } from './salon-details/salon-reviews/add-review-dialog/add-review-dialog.component';
+import { SalonSettingsComponent } from './salon-settings/salon-settings.component';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { AddReviewDialogComponent } from './salon-details/salon-reviews/add-revi
     SalonBarbersComponent,
     SalonDescriptionComponent,
     SalonReviewsComponent,
+    SalonSettingsComponent,
     AddReviewDialogComponent
   ],
   imports: [

@@ -18,6 +18,10 @@
       <div class="caption-title">
         Login
       </div>
+      <div class="login-toggle">
+        <mat-slide-toggle [(ngModel)]="isRoleChecked" *ngIf="isRoleChecked == true">Salon</mat-slide-toggle>
+        <mat-slide-toggle [(ngModel)]="isRoleChecked" *ngIf="isRoleChecked == false">User</mat-slide-toggle>
+      </div>
       <div class="caption-steps-content">
         <div class="caption-step-one">
           <input #searchBox id="search-box" [(ngModel)]="loginRequest.email" placeholder="email" required/>
@@ -26,8 +30,11 @@
           <input #searchBox id="search-box" type="password" [(ngModel)]="loginRequest.password" placeholder="password" required/>
         </div>
         <div class="caption-step-question">
-          <div class="create-account-link" routerLink="/register">
+          <div class="create-account-link" routerLink="/register/User">
             No account? Click here!
+          </div>
+          <div class="create-account-link" routerLink="/register/Salon">
+            Create your own salon here!
           </div>
         </div>
       </div>

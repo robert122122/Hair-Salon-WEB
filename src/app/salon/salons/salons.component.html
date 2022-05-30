@@ -99,7 +99,7 @@
                       {{salon.rating}}
                     </div>
                   </div>
-                  <div class="salon-address" (click)="navigate(salon)">
+                  <div class="salon-address" (click)="navigate(salon)" *ngIf="salon.address !== null">
                     <mat-icon class="address-icon"> pin_drop</mat-icon>
                     <div class="address-content">
                       Street {{salon.address.street}} {{salon.address.number}}, {{salon.address.city}}
@@ -125,7 +125,7 @@
                       {{salon.rating}}
                     </div>
                   </div>
-                  <div class="salon-address" (click)="navigate(salon)">
+                  <div class="salon-address" (click)="navigate(salon)" *ngIf="salon.address !== null">
                     <mat-icon class="address-icon"> pin_drop</mat-icon>
                     <div class="address-content">
                       Street {{salon.address.street}} {{salon.address.number}}, {{salon.address.city}}

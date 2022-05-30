@@ -10,6 +10,13 @@ export interface Salon {
     logo: string
 }
 
+export interface SalonPost {
+    name: string,
+    email: string,
+    phoneNumber: string,
+    password:string
+}
+
 export interface Address {
     id: number,
     country: string,

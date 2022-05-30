@@ -12,6 +12,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import {MatNativeDateModule} from '@angular/material/core';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { UserSettingsModule } from '../user-settings/user-settings.module';
+import { SalonsModule } from '../salon/salon.module';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { UserSettingsModule } from '../user-settings/user-settings.module';
   imports: [
     CommonModule,
     UserSettingsModule,
+    SalonsModule,
     MatToolbarModule,
     MatIconModule,
     MatNativeDateModule,

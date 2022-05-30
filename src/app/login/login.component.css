@@ -98,7 +98,7 @@
 
 .caption-step-question{
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   width: 100%;
   height: 23%;
@@ -171,4 +171,19 @@ input {
 input:focus {
   outline: white
     auto 1px;
+}
+
+.login-toggle{
+  display:flex;
+  margin-right: 1rem;
+  justify-content: flex-end;
+  color: white;
+}
+
+:host /deep/ .mat-slide-toggle-thumb{
+  background-color: var(--main-color);
+}
+
+:host /deep/ .mat-slide-toggle.mat-checked .mat-slide-toggle-thumb {
+  background-color: var(--main-color);
 }

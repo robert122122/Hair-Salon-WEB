@@ -14,7 +14,7 @@
     </ngb-carousel>
   </div>
   <div class="main-caption-container">
-    <div class="main-caption">
+    <div class="main-caption" *ngIf="role=='User'">
       <div class="caption-title">
         Register
       </div>
@@ -40,6 +40,33 @@
       </div>
       <div class="caption-button">
         <button mat-raised-button class="schedule-button" (click)="register()">Confirm</button>
+      </div>
+    </div>
+
+    
+    <div class="main-caption" *ngIf="role=='Salon'">
+      <div class="caption-title">
+        Register Your Salon
+      </div>
+      <div class="caption-steps-content">
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" [(ngModel)]="salonRegistration.name" placeholder="Salon Name" />
+        </div>
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" [(ngModel)]="salonRegistration.email" placeholder="Email" />
+        </div>
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" [(ngModel)]="salonRegistration.phoneNumber" placeholder="Phone Number" />
+        </div>
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" [(ngModel)]="salonRegistration.password" placeholder="Password" />
+        </div>
+        <div class="caption-step-one">
+          <input #searchBox id="search-box" [(ngModel)]="confirmedPassword" placeholder="Confirm Password" />
+        </div>
+      </div>
+      <div class="caption-button">
+        <button mat-raised-button class="schedule-button" (click)="salonRegister()">Confirm</button>
       </div>
     </div>
   </div>

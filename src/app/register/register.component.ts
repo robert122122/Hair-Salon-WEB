@@ -1,7 +1,8 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AlertService } from '../alert.service';
+import { SalonPost } from '../salon/salons/salon';
 import { RegisterRequest } from './register';
 import { RegisterService } from './register.service';
 
@@ -20,11 +21,21 @@ export class RegisterComponent implements OnInit {
     password: "",
   }
 
+  salonRegistration: SalonPost = {
+    name: "",
+    email: "",
+    phoneNumber: "",
+    password: "",
+  }
+
+  role: string = '';
+
   confirmedPassword: string = "";
 
-  constructor(private alertService: AlertService, private registerService: RegisterService, private router: Router) { }
+  constructor(private alertService: AlertService, private registerService: RegisterService, private router: Router, private route: ActivatedRoute,) { }
 
   ngOnInit(): void {
+    this.role = this.route.snapshot.paramMap.get('role')!;
   }
 
 
@@ -34,6 +45,7 @@ export class RegisterComponent implements OnInit {
     if (this.validateRegister()) {
       this.registerService.register(this.userRegistration).subscribe({
         next: () => {
+          this.alertService.alertSuccess("Your account is ready!");
           this.router.navigate(["/login"]);
         },
         error: (err: HttpErrorResponse) => {
@@ -42,8 +54,27 @@ export class RegisterComponent implements OnInit {
       })
     }
     else
-    this.alertService.alertError("Error");
-      return;
+      this.alertService.alertError("Error");
+    return;
+  }
+
+  salonRegister(): void {
+    if(this.confirmedPassword == this.salonRegistration.password)
+    { 
+      this.registerService.salonRegister(this.salonRegistration).subscribe({
+        next: () => {
+          this.alertService.alertSuccess("Your Salon is registered!")
+          this.router.navigate(["/login"]);
+        },
+        error: (err: HttpErrorResponse) => {
+          this.alertService.alertError(err.error.message);
+        }
+      })
+    }
+    else{
+      this.alertService.alertError("Passwords does not match!");
+    }
+
   }
 
   validateRegister(): boolean {

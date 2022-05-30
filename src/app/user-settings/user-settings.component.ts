@@ -2,6 +2,7 @@ import { DatePipe } from '@angular/common';
 import { HttpClient, HttpHeaders, HttpErrorResponse, HttpEventType } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
+import { JwtHelperService } from '@auth0/angular-jwt';
 import { Observable } from 'rxjs';
 import { AlertService } from '../alert.service';
 import { Booking, BookingGet } from '../salon/booking';
@@ -39,12 +40,10 @@ export class UserSettingsComponent implements OnInit {
 
   pipe = new DatePipe('en-US');
 
-  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient, private alertService: AlertService) { }
+  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient, private alertService: AlertService, private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
     this.isCreate = true;
-
-    console.log(this.response);
 
     this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) =>{
       this.bookings = bookings;
@@ -55,11 +54,11 @@ export class UserSettingsComponent implements OnInit {
       this.user = user;
       console.log(user);
     })
+    
   }
 
   updateUser() {
     this.user.image = this.response.dbPath;
-    console.log(this.response.dbPath);
     this.userService.updateUser(this.user).subscribe({
       next: _ => {
         this.alertService.alertSuccess("User updated succesfully!");
