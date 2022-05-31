@@ -1,1 +1,95 @@
-<p>salon-settings works!</p>
+<div class="user-settings-main-container">
+  <mat-tab-group headerPosition="above" bodyOriginState="right">
+    <mat-tab label="My Salon">
+      aas
+    </mat-tab>
+    <mat-tab label="My Barbers">
+      <div class="salon-barbers-container">
+        <div class="barber-button-container">
+          <button mat-button type="button" (click)="openBarberDialog()" class="add-barber-button">
+            <div class="add-barber-button-content">
+              +
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="salon-details-barber" *ngFor="let barber of myBarbers">
+        <div class="barber-content">
+          <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})" *ngIf="barber.image !== ''">
+          </div>
+          <div class="barber-photo-content" *ngIf="barber.image == ''">
+            <mat-icon class="user-icon">perm_identity</mat-icon>
+          </div>
+          <div class="barber-button-text">
+            <div class="barber-firstname">
+              {{barber.firstName}}
+            </div>
+            <div class="barber-lastname">
+              {{barber.lastName}}
+            </div>
+            <div class="barber-age">
+              {{barber.age}} ani
+            </div>
+          </div>
+        </div>
+        <div class="barber-content-actions">
+          <div class="delete-icon-content">
+            <button mat-button class="delete-button" (click)="deleteBarber(barber.id)">
+              <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+          </div>
+          <div class="edit-icon-content">
+            <button mat-button class="edit-button" (click)="openUpdateBarberDialog(barber)">
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="My Services">
+      <div class="salon-barbers-container">
+        <div class="barber-button-container">
+          <button mat-button type="button" (click)="openServiceDialog()" class="add-barber-button">
+            <div class="add-barber-button-content">
+              +
+            </div>
+          </button>
+        </div>
+      </div>
+      <div class="salon-details-service" *ngFor="let service of myServices">
+        <div class="service-content">
+          <div class="service-text">
+            <div class="service-name">
+              {{service.serviceName}}
+            </div>
+            <div class="service-cost">
+              {{service.cost}} lei
+            </div>
+          </div>
+          <div class="service-time">
+            <mat-icon class="service-time-icon">timelapse</mat-icon> {{service.serviceTime}} min
+          </div>
+        </div>
+        <div class="service-content-actions">
+          <div class="delete-icon-content">
+            <button mat-button class="delete-button" (click)="deleteService(service.id)">
+              <mat-icon class="delete-icon">delete</mat-icon>
+            </button>
+          </div>
+          <div class="edit-icon-content">
+            <button mat-button class="edit-button" (click)="openUpdateServiceDialog(service)">
+              <mat-icon class="edit-icon">edit</mat-icon>
+            </button>
+          </div>
+        </div>
+        <mat-divider></mat-divider>
+      </div>
+
+    </mat-tab>
+    <mat-tab label="My Bookings">
+      aa
+    </mat-tab>
+
+  </mat-tab-group>
+</div>

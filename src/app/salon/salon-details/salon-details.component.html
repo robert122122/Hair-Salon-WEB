@@ -76,7 +76,7 @@
             {{navigation.selectedOptions.selected[0]?.value}}
           </div> -->
           <div class="salon-details-service-list" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[0]">
-            <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true">
+            <mat-stepper class="example-stepper" [orientation]="(stepperOrientation | async)!" [linear]="true" *ngIf="userRole=='User'">
               <mat-step [stepControl]="firstFormGroup" label="Service" [completed]="serviceCompleted">
                 <form [formGroup]="firstFormGroup">
                   <div class="salon-details-service" *ngFor="let service of services">
@@ -107,7 +107,10 @@
                   <div class="salon-details-service" *ngFor="let barber of barbers">
                     <button mat-button class="salon-service" matStepperNext>
                       <div class="button-content" (click)="setBarberId(barber.id)">
-                        <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
+                        <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})" *ngIf="barber.image !== ''">
+                        </div>
+                        <div class="barber-photo-content" *ngIf="barber.image == ''">
+                          <mat-icon class="user-icon">perm_identity</mat-icon>
                         </div>
                         <div class="barber-button-text">
                           <div class="barber-firstname">
@@ -167,6 +170,7 @@
                 </div>
               </mat-step>
             </mat-stepper>
+            <div class="role-message-alert" style="color:red" *ngIf="userRole=='Salon'"> You need to login as a user in order to make an appointment!</div>
           </div>
           <div class="salon-details-services" *ngIf="navigation.selectedOptions.selected[0].value === menuItems[1]">
             <app-salon-services></app-salon-services>

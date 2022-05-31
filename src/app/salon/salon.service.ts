@@ -1,11 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { from, Observable } from 'rxjs';
-import { Barber } from './salon-details/salon-barbers/barber';
+import { Barber, BarberPost, BarberPut } from './salon-details/salon-barbers/barber';
 import { Booking, BookingGet, BookingResponse } from './booking';
 import { Review, ReviewPost } from './salon-details/review';
 import { Salon } from './salons/salon';
-import { Service } from './salon-details/salon-services/service';
+import { Service, ServicePost, ServicePut } from './salon-details/salon-services/service';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +40,30 @@ export class SalonService {
 
   addReview(review: ReviewPost): Observable<ReviewPost> {
     return this.httpService.post<ReviewPost>('https://localhost:44396/api/Review', review);
+  }
+
+  addBarber(barber: BarberPost): Observable<BarberPost> {
+    return this.httpService.post<BarberPost>('https://localhost:44396/api/Barber', barber);
+  }
+
+  addService(service: ServicePost): Observable<ServicePost> {
+    return this.httpService.post<ServicePost>('https://localhost:44396/api/Service', service);
+  }
+
+  updateBarber(barber: BarberPut, barberId: number): Observable<Barber> {
+    return this.httpService.put<Barber>(`https://localhost:44396/api/Barber/${barberId}`, barber);
+  }
+
+  updateService(service: ServicePut, serviceId: number): Observable<Service> {
+    return this.httpService.put<Service>(`https://localhost:44396/api/Service/${serviceId}`, service);
+  }
+
+  deleteBarber(barberId: number): Observable<Barber> {
+    return this.httpService.delete<Barber>(`https://localhost:44396/api/Barber/${barberId}`);
+  }
+
+  deleteService(serviceId: number): Observable<Service> {
+    return this.httpService.delete<Service>(`https://localhost:44396/api/Service/${serviceId}`);
   }
 
   getBookingsByUser(userId: number): Observable<Booking[]>{

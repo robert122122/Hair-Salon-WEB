@@ -34,3 +34,8 @@
 .mat-divider {
   border-top-color: rgba(128, 128, 128, 0.136);
 }
+
+.user-icon{
+  transform: scale(3);
+  color:gray !important;
+}

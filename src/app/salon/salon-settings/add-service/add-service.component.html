@@ -1,0 +1,66 @@
+<div class="add-service-container">
+  <div mat-dialog-content class="add-service-dialog">
+    <h1 mat-dialog-title>Add Service</h1>
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Service Name</mat-label>
+        <input type="string" matInput [formControl]="serviceNameFormControl" [(ngModel)]="serviceToAdd.serviceName"
+          (ngModelChange)="checkFormControls()" placeholder="Tuns scurt">
+        <mat-error
+          *ngIf="(serviceNameFormControl.hasError('minlength') || serviceNameFormControl.hasError('maxlength')) && !serviceNameFormControl.hasError('required')">
+          Please enter a valid service
+        </mat-error>
+        <mat-error *ngIf="serviceNameFormControl.hasError('required')">
+          Service name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Description</mat-label>
+        <input type="string" matInput [formControl]="descriptionFormControl" [(ngModel)]="serviceToAdd.description"
+          (ngModelChange)="checkFormControls()" placeholder="....">
+        <mat-error
+          *ngIf="(descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')) && !descriptionFormControl.hasError('required')">
+          Please enter a valid description
+        </mat-error>
+        <mat-error *ngIf="descriptionFormControl.hasError('required')">
+          Description of your service is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Cost</mat-label>
+        <input type="number" matInput [formControl]="costFormControl" [(ngModel)]="serviceToAdd.cost"
+          (ngModelChange)="checkFormControls()" placeholder="45 lei">
+        <mat-error
+          *ngIf="costFormControl.hasError('min') || costFormControl.hasError('max') && !costFormControl.hasError('required')">
+          Please enter a valid cost between 0 and 1000
+        </mat-error>
+        <mat-error *ngIf="costFormControl.hasError('required')">
+          Cost is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Time</mat-label>
+        <input type="number" matInput [formControl]="serviceTimeFormControl" [(ngModel)]="serviceToAdd.serviceTime"
+          (ngModelChange)="checkFormControls()" placeholder="30 minute">
+        <mat-error
+          *ngIf="serviceTimeFormControl.hasError('min') || serviceTimeFormControl.hasError('max') && !serviceTimeFormControl.hasError('required')">
+          Please enter a valid time between 10 and 180 minutes
+        </mat-error>
+        <mat-error *ngIf="costFormControl.hasError('required')">
+          Service Time is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+
+    </form>
+    <div mat-dialog-actions class="caption-button">
+      <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"
+        [mat-dialog-close]="serviceToAdd" (click)="addService()" >Save</button>
+    </div>
+  </div>

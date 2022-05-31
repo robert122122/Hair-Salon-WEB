@@ -1,0 +1,54 @@
+<div class="add-barber-container">
+  <div mat-dialog-content class="add-barber-dialog">
+    <h1 mat-dialog-title>Add Barber</h1>
+    <form class="example-form">
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>FirstName</mat-label>
+        <input type="string" matInput [formControl]="firstnameFormControl" [(ngModel)]="barberToAdd.firstName"
+          (ngModelChange)="checkFormControls()" placeholder="John">
+        <mat-error
+          *ngIf="(firstnameFormControl.hasError('minlength') || firstnameFormControl.hasError('maxlength')) && !firstnameFormControl.hasError('required')">
+          Please enter a valid name
+        </mat-error>
+        <mat-error *ngIf="firstnameFormControl.hasError('required')">
+          First name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>LastName</mat-label>
+        <input type="string" matInput [formControl]="lastnameFormControl" [(ngModel)]="barberToAdd.lastName"
+          (ngModelChange)="checkFormControls()" placeholder="Doe">
+        <mat-error
+          *ngIf="(lastnameFormControl.hasError('minlength') || lastnameFormControl.hasError('maxlength')) && !lastnameFormControl.hasError('required')">
+          Please enter a valid name
+        </mat-error>
+        <mat-error *ngIf="lastnameFormControl.hasError('required')">
+          Last name is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Age</mat-label>
+        <input type="number" matInput [formControl]="ageFormControl" [(ngModel)]="barberToAdd.age"
+          (ngModelChange)="checkFormControls()" placeholder="Ex. pat@example.com">
+        <mat-error
+          *ngIf="ageFormControl.hasError('min') || ageFormControl.hasError('max') && !ageFormControl.hasError('required')">
+          Please enter a valid age between 14 and 99
+        </mat-error>
+        <mat-error *ngIf="ageFormControl.hasError('required')">
+          Email is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <mat-divider></mat-divider>
+
+    </form>
+
+    <div mat-dialog-actions class="caption-button">
+      <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton" [mat-dialog-close]="barberToAdd"
+        (click)="addBarber()" cdkFocusInitial>Save</button>
+    </div>
+  </div>

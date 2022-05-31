@@ -1,6 +1,9 @@
 <div class="salon-details-barber" *ngFor="let barber of barbers">
   <div class="barber-content">
-    <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})">
+    <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})" *ngIf="barber.image !== ''">
+    </div>
+    <div class="barber-photo-content" *ngIf="barber.image == ''">
+      <mat-icon class="user-icon">perm_identity</mat-icon>
     </div>
     <div class="barber-button-text">
       <div class="barber-firstname">

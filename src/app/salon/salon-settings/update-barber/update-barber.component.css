@@ -1,0 +1,57 @@
+.add-barber-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  
+  :host /deep/ .cdk-overlay-pane {
+    justify-content: center !important;
+    width: 50% !important;
+  }
+  
+  :host /deep/ .mat-dialog-container {
+    width: 50% !important;
+  }
+  
+  :host /deep/ .mat-form-field {
+    width: 100% !important;
+  }
+  
+  :host /deep/ .mat-dialog-content {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    overflow: hidden;
+  }
+  
+  :host /deep/ .mat-dialog-actions {
+    justify-content: center;
+  }
+  
+  :host /deep/ .mat-dialog-title {
+    text-align: center;
+  }
+  
+  :host /deep/ .mat-dialog-container {
+    background: white !important;
+    width: 50% !important;
+  }
+  
+  .caption-button {
+    display: flex;
+    justify-content: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  
+  .schedule-button {
+    background-color: var(--main-color);
+    width: 100%;
+  }
+  
+  .schedule-button:hover {
+    background-color: #424242;
+    outline: 1px solid var(--main-color);
+  }
+  

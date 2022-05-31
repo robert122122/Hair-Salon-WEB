@@ -2,18 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../../salon.service';
 import { Review } from '../review';
-
-import { FormBuilder } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
 import { DatePipe } from '@angular/common';
-import { HostListener } from "@angular/core";
+import { JwtHelperService } from '@auth0/angular-jwt';
+import { AlertService } from 'src/app/alert.service';
 
 
 export interface DialogData {
   salonId: number;
-  animal: string;
-  name: string;
 }
 
 @Component({
@@ -27,7 +24,10 @@ export class SalonReviewsComponent implements OnInit {
 
   value = '';
 
+  userRole: string = '';
+
   mobWidth: any;
+
 
   sortingOptions = ["DateAdded Asc", "DateAdded Desc", "Rating Asc", "Rating Desc"];
 
@@ -39,24 +39,32 @@ export class SalonReviewsComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
     private salonService: SalonService,
+    private jwtHelper: JwtHelperService,
+    private alertService: AlertService,
     public dialog: MatDialog) {
     this.mobWidth = (window.screen.width) + "px";
-    console.log(this.mobWidth)
   }
 
   openDialog(): void {
-    let dialogRef = this.dialog.open(AddReviewDialogComponent, {
-      width: this.mobWidth,
-      data: { salonId: this.salonId },
-    });
+    if(this.userRole == 'User'){
+      let dialogRef = this.dialog.open(AddReviewDialogComponent, {
+        width: this.mobWidth,
+        data: { salonId: this.salonId },
+      });
+  
+      dialogRef.afterClosed().subscribe(result => {
+        if (result.rating > 0 && result.text.length >= 10) {
+          this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
+            console.log(reviews);
+            this.reviews = reviews;
+          })
+        }
+      });
+    }
+    else if (this.userRole == 'Salon'){
+      this.alertService.alertWarning("You need to login as a user!");
+    }
 
-    dialogRef.afterClosed().subscribe(result => {
-      if (result.rating > 0 && result.text.length >= 10) {
-        this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
-          this.reviews = reviews;
-        })
-      }
-    });
   }
 
   ngOnInit(): void {
@@ -65,6 +73,23 @@ export class SalonReviewsComponent implements OnInit {
       this.reviews = reviews;
       console.log(reviews);
     })
+
+    const token = localStorage.getItem("jwt");
+    const decode = this.jwtHelper.decodeToken(token!);
+    let str;
+    const newObj = {} as any;
+    for (let prop in decode) {
+      const val = decode[prop];
+      if (prop.includes('/')) {
+        str = prop.substring(prop.lastIndexOf('/') + 1, prop.length);
+      }
+      else {
+        str = prop;
+      }
+      newObj[str] = val;
+    }
+
+    this.userRole = newObj.role;
 
   }
 

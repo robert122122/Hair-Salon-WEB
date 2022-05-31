@@ -11,6 +11,7 @@ import { Booking } from '../booking';
 import { Review } from './review';
 import { Service } from './salon-services/service';
 import { Barber } from './salon-barbers/barber';
+import { JwtHelperService } from '@auth0/angular-jwt';
 
 export interface serviceTime {
   hour: number,
@@ -28,12 +29,15 @@ export class SalonDetailsComponent implements OnInit {
 
   opened = false;
 
+  userRole:string = '';
+
   constructor(
     private route: ActivatedRoute,
     private salonService: SalonService,
     private _formBuilder: FormBuilder,
     breakpointObserver: BreakpointObserver,
     private alertService: AlertService,
+    private jwtHelper: JwtHelperService,
   ) {
     this.stepperOrientation = breakpointObserver
       .observe('(min-width: 800px)')
@@ -151,6 +155,22 @@ export class SalonDetailsComponent implements OnInit {
       const x = localStorage.getItem('userId');
     }
 
+    const token = localStorage.getItem("jwt");
+    const decode = this.jwtHelper.decodeToken(token!);
+    let str;
+    const newObj = {} as any;
+    for (let prop in decode) {
+      const val = decode[prop];
+      if (prop.includes('/')) {
+        str = prop.substring(prop.lastIndexOf('/') + 1, prop.length);
+      }
+      else {
+        str = prop;
+      }
+      newObj[str] = val;
+    }
+
+    this.userRole = newObj.role;
 
   }
 
