@@ -17,6 +17,7 @@ import { AddBarberComponent } from './salon-settings/add-barber/add-barber.compo
 import { AddServiceComponent } from './salon-settings/add-service/add-service.component';
 import { UpdateBarberComponent } from './salon-settings/update-barber/update-barber.component';
 import { UpdateServiceComponent } from './salon-settings/update-service/update-service.component';
+import { UploadModule } from '../upload/upload.module';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { UpdateServiceComponent } from './salon-settings/update-service/update-s
     AddServiceComponent,
     UpdateBarberComponent,
     UpdateServiceComponent,
+
   ],
   imports: [
     CommonModule,
@@ -42,7 +44,8 @@ import { UpdateServiceComponent } from './salon-settings/update-service/update-s
     HttpClientModule,
     ReactiveFormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    UploadModule
   ]
 })
 export class SalonsModule { }

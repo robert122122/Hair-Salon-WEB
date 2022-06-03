@@ -1,7 +1,58 @@
 <div class="user-settings-main-container">
   <mat-tab-group headerPosition="above" bodyOriginState="right">
     <mat-tab label="My Salon">
-      aas
+      <div class="user-settings-container">
+        <div class="user-account-details">
+          <form class="example-form">
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>FirstName</mat-label>
+              <input type="string" matInput [formControl]="nameFormControl" [(ngModel)]="mySalon.name"
+                (ngModelChange)="checkFormControls()" placeholder="John">
+              <mat-error
+                *ngIf="(nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')) && !nameFormControl.hasError('required')">
+                Please enter a valid name
+              </mat-error>
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+                Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Email</mat-label>
+              <input type="email" matInput [formControl]="emailFormControl" [(ngModel)]="mySalon.email"
+                (ngModelChange)="checkFormControls()" placeholder="Ex. pat@example.com">
+              <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+                Please enter a valid email address
+              </mat-error>
+              <mat-error *ngIf="emailFormControl.hasError('required')">
+                Email is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Phone Number</mat-label>
+              <input type="string" matInput [formControl]="phonenumberFormControl" [(ngModel)]="mySalon.phoneNumber"
+                (ngModelChange)="checkFormControls()" placeholder="0747652147">
+              <mat-error
+                *ngIf="(phonenumberFormControl.hasError('minlength') || phonenumberFormControl.hasError('maxlength')) && !phonenumberFormControl.hasError('required')">
+                Please enter a valid phone number
+              </mat-error>
+              <mat-error *ngIf="phonenumberFormControl.hasError('required')">
+                Phone number is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+
+            <!-- <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload> -->
+          </form>
+          <div class="caption-button">
+            <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"
+              (click)="updateSalon()">Save</button>
+          </div>
+        </div>
+      </div>
     </mat-tab>
     <mat-tab label="My Barbers">
       <div class="salon-barbers-container">
@@ -15,7 +66,8 @@
       </div>
       <div class="salon-details-barber" *ngFor="let barber of myBarbers">
         <div class="barber-content">
-          <div class="barber-photo-content" style="backgroundImage: url({{barber.image}})" *ngIf="barber.image !== ''">
+          <div class="barber-photo-content" [style.backgroundImage]="'url('+ createImgPath(barber.image) +')'" *ngIf="barber.image !== ''">
+
           </div>
           <div class="barber-photo-content" *ngIf="barber.image == ''">
             <mat-icon class="user-icon">perm_identity</mat-icon>
@@ -88,7 +140,19 @@
 
     </mat-tab>
     <mat-tab label="My Bookings">
-      aa
+      <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 demo-table">
+        <ng-container *ngFor="let column of columns" [matColumnDef]="column.columnDef">
+          <th mat-header-cell *matHeaderCellDef>
+            {{column.header}}
+          </th>
+          <td mat-cell *matCellDef="let row">
+            {{column.cell(row)}}
+          </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>  
     </mat-tab>
 
   </mat-tab-group>

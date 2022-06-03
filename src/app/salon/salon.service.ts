@@ -4,7 +4,7 @@ import { from, Observable } from 'rxjs';
 import { Barber, BarberPost, BarberPut } from './salon-details/salon-barbers/barber';
 import { Booking, BookingGet, BookingResponse } from './booking';
 import { Review, ReviewPost } from './salon-details/review';
-import { Salon } from './salons/salon';
+import { Salon, SalonPut } from './salons/salon';
 import { Service, ServicePost, ServicePut } from './salon-details/salon-services/service';
 
 @Injectable({
@@ -70,7 +70,15 @@ export class SalonService {
     return this.httpService.get<Booking[]>(`https://localhost:44396/api/Booking/User/${userId}`);
   }
 
+  getBookingsBySalon(salonId: number): Observable<BookingGet[]>{
+    return this.httpService.get<BookingGet[]>(`https://localhost:44396/api/Booking/Salon/${salonId}`);
+  }
+
   getBookingsByUserWithDetails(userId: number): Observable<BookingGet[]>{
     return this.httpService.get<BookingGet[]>(`https://localhost:44396/api/Booking/User/${userId}`);
+  }
+
+  updateSalon(salon: SalonPut, salonId: number): Observable<Salon> {
+    return this.httpService.put<Salon>(`https://localhost:44396/api/Salon/${salonId}`, salon);
   }
 }

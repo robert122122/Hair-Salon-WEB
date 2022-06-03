@@ -12,7 +12,7 @@ export interface BookingGet {
     service: string,
     barber: string,
     bookingDate:Date,
-    userId:number
+    user:string
 }
 
 

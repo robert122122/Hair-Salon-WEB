@@ -17,6 +17,15 @@ export interface SalonPost {
     password:string
 }
 
+export interface SalonPut {
+    name: string,
+    description: string,
+    email: string,
+    phoneNumber: string,
+    logo: string,
+    image: string
+}
+
 export interface Address {
     id: number,
     country: string,

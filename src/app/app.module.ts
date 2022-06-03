@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { ScrollToTopComponent } from './scroll-to-top/scroll-to-top.component';
 import { AuthGuard } from './guards/auth.guard';
 import { JwtModule } from '@auth0/angular-jwt';
+
 export function tokenGetter() { 
   return localStorage.getItem("jwt"); 
 }

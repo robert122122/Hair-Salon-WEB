@@ -21,6 +21,11 @@ export class AddBarberComponent implements OnInit {
     image: ""
   }
 
+  isCreate: boolean = true;
+
+  response!: { dbPath: ''; };
+
+
   firstnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
   lastnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
   ageFormControl = new FormControl('', [Validators.required, Validators.min(14), Validators.max(99)]);
@@ -35,14 +40,26 @@ export class AddBarberComponent implements OnInit {
 
   ngOnInit(): void {
 
+    this.isCreate = true;
     this.checkFormControls();
     this.barberToAdd.salonId = this.data.salonId;
   }
 
+  uploadFinished = (event:any) => { 
+    this.response = event; 
+    this.checkFormControls();
+  }
+
+  public createImgPath = (serverPath: string) => { 
+    return `https://localhost:44396/${serverPath}`; 
+  }
+
   addBarber() {
     if (this.checkFormControls() == false) {
+      this.barberToAdd.image = this.response.dbPath;
       this.salonService.addBarber(this.barberToAdd).subscribe((barber) => {
-        console.log(barber);
+        this.alertService.alertSuccess("Barber added successfully");
+        this.isCreate = false;
       })
     }
     else this.alertService.alertError("");

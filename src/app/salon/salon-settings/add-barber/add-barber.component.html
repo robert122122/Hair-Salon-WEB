@@ -44,7 +44,7 @@
         </mat-error>
       </mat-form-field>
       <mat-divider></mat-divider>
-
+      <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
     </form>
 
     <div mat-dialog-actions class="caption-button">

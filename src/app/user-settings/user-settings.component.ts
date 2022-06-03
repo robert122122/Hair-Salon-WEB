@@ -1,11 +1,10 @@
 import { DatePipe } from '@angular/common';
-import { HttpClient, HttpHeaders, HttpErrorResponse, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { JwtHelperService } from '@auth0/angular-jwt';
-import { Observable } from 'rxjs';
 import { AlertService } from '../alert.service';
-import { Booking, BookingGet } from '../salon/booking';
+import { BookingGet } from '../salon/booking';
 import { SalonService } from '../salon/salon.service';
 import { UserService } from '../user.service';
 import { User } from './user';
@@ -34,7 +33,7 @@ export class UserSettingsComponent implements OnInit {
   lastnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
   phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]);
 
-  disabledButton: boolean = false;
+  disabledButton: boolean = true;
 
   bookings: BookingGet [] = [];
 
@@ -58,7 +57,10 @@ export class UserSettingsComponent implements OnInit {
   }
 
   updateUser() {
-    this.user.image = this.response.dbPath;
+    if(this.response!=undefined) {
+      this.user.image = this.response.dbPath;
+    }
+    
     this.userService.updateUser(this.user).subscribe({
       next: _ => {
         this.alertService.alertSuccess("User updated succesfully!");
@@ -82,11 +84,21 @@ export class UserSettingsComponent implements OnInit {
   }
 
   checkFormControls(): void {
+    console.log(this.response);
+    console.log(this.emailFormControl.errors);
+    console.log(this.firstnameFormControl.errors);
 
-    if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null || this.firstnameFormControl.errors != null || this.response == undefined) {
+    console.log(this.lastnameFormControl.errors);
+
+    console.log(this.phonenumberFormControl.errors);
+
+
+    if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null ) {
       this.disabledButton = true;
+      console.log(true);
       return;
     }
+    console.log(false);
     this.disabledButton = false;
   }
 
