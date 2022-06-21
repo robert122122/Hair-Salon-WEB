@@ -30,6 +30,8 @@ export interface UpdateServiceDialogData {
 })
 export class SalonSettingsComponent implements OnInit {
 
+  isCreate: boolean = true;
+
   mySalon: SalonPut = {
     name: "",
     description: "",
@@ -38,6 +40,9 @@ export class SalonSettingsComponent implements OnInit {
     logo: "",
     image: ""
   }
+
+  response!: { dbPath: ''; };
+
 
   myBarbers: Barber[] = [];
 
@@ -58,6 +63,7 @@ export class SalonSettingsComponent implements OnInit {
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
   nameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
   phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]);
+  descriptionFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(1000)]);
 
   constructor(
     private salonService: SalonService,
@@ -79,6 +85,7 @@ export class SalonSettingsComponent implements OnInit {
       this.mySalon.name = salon.name;
       this.mySalon.email = salon.email;
       this.mySalon.phoneNumber = salon.phoneNumber; 
+      this.mySalon.description = salon.description;
     })
 
     this.salonService.getBookingsBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((bookings) => {
@@ -174,22 +181,31 @@ export class SalonSettingsComponent implements OnInit {
     return this.imgPath;
   }
 
-  getString(serverPath: string): string {
-    this.imgPath = this.createImgPath(serverPath);
-    return this.imgPath;
-  }
-
   updateSalon() {
+    if(this.response!=undefined){
+      this.mySalon.image = this.response.dbPath;
+    }
     console.log(this.mySalon);
     this.salonService.updateSalon(this.mySalon, parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
       this.alertService.alertSuccess("Salon updated successfully");
+      this.isCreate = false;
+
     })
+  }
+
+  returnToUpdate = () => {
+    this.isCreate = true;
+  }
+
+  uploadFinished = (event:any) => { 
+    this.response = event; 
+    this.checkFormControls();
   }
 
   
   checkFormControls(): void {
 
-    if (this.emailFormControl.errors != null || this.nameFormControl.errors != null || this.phonenumberFormControl.errors != null) {
+    if (this.emailFormControl.errors != null || this.nameFormControl.errors != null || this.phonenumberFormControl.errors != null || this.descriptionFormControl.errors != null) {
       this.disabledButton = true;
       return;
     }

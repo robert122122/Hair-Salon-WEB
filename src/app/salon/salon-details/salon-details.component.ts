@@ -201,9 +201,9 @@ export class SalonDetailsComponent implements OnInit {
 
     this.bookingDateCompleted = true;
 
-    setTimeout(() => {                           // <<<---using ()=> syntax
-      this.resetStepper();
-    }, 200);
+    // setTimeout(() => {                           // <<<---using ()=> syntax
+    //   this.resetStepper();
+    // }, 200);
 
     this.alertService.alertSuccess("Appointment success!");
   }

@@ -14,9 +14,9 @@ export class SalonsComponent implements OnInit {
   constructor(private salonService: SalonService) { }
 
 
-  ratingNumbers: number[] = [1,2,3,4,5];
+  ratingNumbers: number[] = [1, 2, 3, 4, 5];
 
-  selectedRatings: number[] =[];
+  selectedRatings: number[] = [];
 
   panelOpenState = false;
 
@@ -59,7 +59,7 @@ export class SalonsComponent implements OnInit {
   }
 
   navigate(salon: any): any {
-    window.location.href = "https://www.google.com/maps/place/Strada+"+salon.address.street+"+"+salon.address.number+","+salon.address.city+",";
+    window.location.href = "https://www.google.com/maps/place/Strada+" + salon.address.street + "+" + salon.address.number + "," + salon.address.city + ",";
   }
 
   searchSalon(): any {
@@ -86,6 +86,17 @@ export class SalonsComponent implements OnInit {
       this.selectedCities.splice(x, 1);
       console.log(this.selectedCities);
     }
+  }
+
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44396/${serverPath}`;
+  }
+
+  checkImage(image: string) {
+    if (image.includes('https') == true)
+      return true
+    else
+      return false
   }
 
   handleSelectedRating(rating: number): any {

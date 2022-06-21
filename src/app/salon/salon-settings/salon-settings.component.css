@@ -3,6 +3,13 @@
   display: flex;
   margin: auto;
   padding-top: 2rem;
+  flex-direction: column;
+
+}
+
+.user-photo{
+  margin-left:5rem;
+  padding-bottom: 1rem;
 }
 
 .salon-barbers-container {

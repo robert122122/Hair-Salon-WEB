@@ -1,4 +1,7 @@
 <div class="user-settings-main-container">
+  <div class="user-photo">
+    <img [src]="createImgPath(mySalon.image)" alt="profile picture" style="width:100px; height:100px;" *ngIf="mySalon.image != ''">
+  </div>
   <mat-tab-group headerPosition="above" bodyOriginState="right">
     <mat-tab label="My Salon">
       <div class="user-settings-container">
@@ -15,6 +18,20 @@
               </mat-error>
               <mat-error *ngIf="nameFormControl.hasError('required')">
                 Name is <strong>required</strong>
+              </mat-error>
+            </mat-form-field>
+            <mat-divider></mat-divider>
+
+            <mat-form-field class="example-full-width" appearance="fill">
+              <mat-label>Description</mat-label>
+              <input type="string" matInput [formControl]="descriptionFormControl" [(ngModel)]="mySalon.description"
+                (ngModelChange)="checkFormControls()" placeholder="John">
+              <mat-error
+                *ngIf="(nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')) && !nameFormControl.hasError('required')">
+                Please enter a valid description
+              </mat-error>
+              <mat-error *ngIf="nameFormControl.hasError('required')">
+                Description is <strong>required</strong>
               </mat-error>
             </mat-form-field>
             <mat-divider></mat-divider>
@@ -45,7 +62,7 @@
               </mat-error>
             </mat-form-field>
 
-            <!-- <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload> -->
+            <app-upload (onUploadFinished)="uploadFinished($event)"></app-upload>
           </form>
           <div class="caption-button">
             <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"

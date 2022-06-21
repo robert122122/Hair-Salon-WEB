@@ -84,14 +84,6 @@ export class UserSettingsComponent implements OnInit {
   }
 
   checkFormControls(): void {
-    console.log(this.response);
-    console.log(this.emailFormControl.errors);
-    console.log(this.firstnameFormControl.errors);
-
-    console.log(this.lastnameFormControl.errors);
-
-    console.log(this.phonenumberFormControl.errors);
-
 
     if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null ) {
       this.disabledButton = true;

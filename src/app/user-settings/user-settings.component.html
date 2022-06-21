@@ -17,7 +17,7 @@
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-      </table>  
+      </table>
 
     </mat-tab>
     <mat-tab label="Settings">
@@ -85,6 +85,11 @@
             <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"
               (click)="updateUser()">Save</button>
           </div>
+
+          <button type="button">HTML Button!</button> 
+          -
+          <button mat-raised-button class="angular-button">Angular button!</button>
+
         </div>
       </div>
     </mat-tab>
