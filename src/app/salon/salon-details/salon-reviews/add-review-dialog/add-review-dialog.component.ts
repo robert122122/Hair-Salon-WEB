@@ -1,11 +1,10 @@
-import { Component, Inject, Input, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/alert.service';
-import { RegisterRoutingModule } from 'src/app/register/register-routing.module';
 import { SalonService } from 'src/app/salon/salon.service';
-import { ReviewPost } from '../../review';
+import { ReviewPost } from '../review';
+import { ReviewService } from '../review.service';
 import { DialogData } from '../salon-reviews.component';
 
 @Component({
@@ -33,6 +32,7 @@ export class AddReviewDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private salonService: SalonService,
     private alertService: AlertService,
+    private reviewService: ReviewService
   ) { }
 
   ngOnInit(): void {
@@ -40,7 +40,7 @@ export class AddReviewDialogComponent implements OnInit {
   }
 
   addReview(): void {
-    this.salonService.addReview(this.newReview).subscribe((review: ReviewPost) => {
+    this.reviewService.addReview(this.newReview).subscribe((review: ReviewPost) => {
       this.alertService.alertSuccess("Review added successfully!");
     });
   }

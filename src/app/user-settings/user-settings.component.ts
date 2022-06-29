@@ -6,8 +6,8 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertService } from '../alert.service';
 import { BookingGet } from '../salon/booking';
 import { SalonService } from '../salon/salon.service';
-import { UserService } from '../user.service';
 import { User } from './user';
+import { UserService } from './user.service';
 
 @Component({
   selector: 'app-user-settings',

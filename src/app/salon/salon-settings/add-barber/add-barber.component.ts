@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService } from 'src/app/alert.service';
 import { BarberPost } from '../../salon-details/salon-barbers/barber';
+import { BarberService } from '../../salon-details/salon-barbers/barber.service';
 import { DialogData } from '../../salon-details/salon-reviews/salon-reviews.component';
 import { SalonService } from '../../salon.service';
 
@@ -34,6 +35,7 @@ export class AddBarberComponent implements OnInit {
 
   constructor(
     private salonService: SalonService,
+    private barberService: BarberService,
     public dialogRef: MatDialogRef<AddBarberComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, 
     private alertService: AlertService) { }
@@ -57,7 +59,7 @@ export class AddBarberComponent implements OnInit {
   addBarber() {
     if (this.checkFormControls() == false) {
       this.barberToAdd.image = this.response.dbPath;
-      this.salonService.addBarber(this.barberToAdd).subscribe((barber) => {
+      this.barberService.addBarber(this.barberToAdd).subscribe((barber) => {
         this.alertService.alertSuccess("Barber added successfully");
         this.isCreate = false;
       })

@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService } from 'src/app/alert.service';
 import { ServicePut } from '../../salon-details/salon-services/service';
+import { ServiceService } from '../../salon-details/salon-services/service.service';
 import { SalonService } from '../../salon.service';
 import { UpdateServiceDialogData } from '../salon-settings.component';
 
@@ -31,6 +32,7 @@ export class UpdateServiceComponent implements OnInit {
     public dialogRef: MatDialogRef<UpdateServiceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: UpdateServiceDialogData, 
     private salonService: SalonService, 
+    private serviceService: ServiceService,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -45,7 +47,7 @@ export class UpdateServiceComponent implements OnInit {
 
   updateService() {
     if (this.checkFormControls() == false) {
-      this.salonService.updateService(this.serviceUpdated, this.data.service.id).subscribe((service) => {
+      this.serviceService.updateService(this.serviceUpdated, this.data.service.id).subscribe((service) => {
         console.log(service);
       })
     }

@@ -7,7 +7,10 @@ import { AlertService } from 'src/app/alert.service';
 import { User } from 'src/app/login/login';
 import { BookingGet } from '../booking';
 import { Barber, BarberPost } from '../salon-details/salon-barbers/barber';
+import { BarberService } from '../salon-details/salon-barbers/barber.service';
+import { ReviewService } from '../salon-details/salon-reviews/review.service';
 import { Service, ServicePut } from '../salon-details/salon-services/service';
+import { ServiceService } from '../salon-details/salon-services/service.service';
 import { SalonService } from '../salon.service';
 import { SalonPut } from '../salons/salon';
 import { AddBarberComponent } from './add-barber/add-barber.component';
@@ -67,17 +70,19 @@ export class SalonSettingsComponent implements OnInit {
 
   constructor(
     private salonService: SalonService,
+    private barberService: BarberService,
+    private serviceService: ServiceService,
     private alertService: AlertService,
     public dialog: MatDialog) {
   }
 
   ngOnInit(): void {
 
-    this.salonService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
+    this.barberService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
       this.myBarbers = barbers;
     })
 
-    this.salonService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
+    this.serviceService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
       this.myServices = services;
     })
 
@@ -103,7 +108,7 @@ export class SalonSettingsComponent implements OnInit {
 
     barberDialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        this.salonService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
+        this.barberService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
           this.myBarbers = barbers;
         })
       }
@@ -118,7 +123,7 @@ export class SalonSettingsComponent implements OnInit {
 
     barberDialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        this.salonService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
+        this.barberService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
           this.myBarbers = barbers;
         })
       }
@@ -133,7 +138,7 @@ export class SalonSettingsComponent implements OnInit {
 
     serviceDialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        this.salonService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
+        this.serviceService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
           this.myServices = services;
         })
       }
@@ -148,7 +153,7 @@ export class SalonSettingsComponent implements OnInit {
 
     serviceDialogRef.afterClosed().subscribe(result => {
       if (result != undefined) {
-        this.salonService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
+        this.serviceService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
           this.myServices = services;
         })
       }
@@ -157,8 +162,8 @@ export class SalonSettingsComponent implements OnInit {
 
   deleteBarber(barberId: number) {
 
-    this.salonService.deleteBarber(barberId).subscribe(() => {
-      this.salonService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
+    this.barberService.deleteBarber(barberId).subscribe(() => {
+      this.barberService.getBarbersBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((barbers: Barber[]) => {
         this.myBarbers = barbers;
       })
       this.alertService.alertSuccess("Barber deleted successfully!");
@@ -166,8 +171,8 @@ export class SalonSettingsComponent implements OnInit {
   }
 
   deleteService(serviceId: number) {
-    this.salonService.deleteService(serviceId).subscribe(() => {
-      this.salonService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
+    this.serviceService.deleteService(serviceId).subscribe(() => {
+      this.serviceService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
         this.myServices = services;
       })
       this.alertService.alertSuccess("Service deleted successfully!");

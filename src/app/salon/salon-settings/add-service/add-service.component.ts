@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { AlertService } from 'src/app/alert.service';
 import { DialogData } from '../../salon-details/salon-reviews/salon-reviews.component';
 import { ServicePost } from '../../salon-details/salon-services/service';
+import { ServiceService } from '../../salon-details/salon-services/service.service';
 import { SalonService } from '../../salon.service';
 
 @Component({
@@ -31,7 +32,8 @@ export class AddServiceComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<AddServiceComponent>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData, 
-    private salonService: SalonService, 
+    private salonService: SalonService,
+    private serviceService: ServiceService,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -41,7 +43,7 @@ export class AddServiceComponent implements OnInit {
 
   addService() {
     if (this.checkFormControls() == false) {
-      this.salonService.addService(this.serviceToAdd).subscribe((service) => {
+      this.serviceService.addService(this.serviceToAdd).subscribe((service) => {
         console.log(service);
       })
     }

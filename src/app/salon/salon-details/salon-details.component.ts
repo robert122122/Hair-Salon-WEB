@@ -8,10 +8,13 @@ import { StepperOrientation } from '@angular/cdk/stepper';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { AlertService } from 'src/app/alert.service';
 import { Booking } from '../booking';
-import { Review } from './review';
+import { Review } from './salon-reviews/review';
 import { Service } from './salon-services/service';
 import { Barber } from './salon-barbers/barber';
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { ReviewService } from './salon-reviews/review.service';
+import { BarberService } from './salon-barbers/barber.service';
+import { ServiceService } from './salon-services/service.service';
 
 export interface serviceTime {
   hour: number,
@@ -34,6 +37,9 @@ export class SalonDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private salonService: SalonService,
+    private reviewService: ReviewService,
+    private barberService: BarberService,
+    private serviceService: ServiceService,
     private _formBuilder: FormBuilder,
     breakpointObserver: BreakpointObserver,
     private alertService: AlertService,
@@ -119,7 +125,7 @@ export class SalonDetailsComponent implements OnInit {
 
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
 
-    this.salonService.getReviewsBySalon(id).subscribe((reviews: Review[]) => {
+    this.reviewService.getReviewsBySalon(id).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
     })
 
@@ -129,11 +135,11 @@ export class SalonDetailsComponent implements OnInit {
 
     this.maxDate.setDate(this.maxDate.getDate() + 2 * 7);
 
-    this.salonService.getServicesBySalon(id).subscribe((services: Service[]) => {
+    this.serviceService.getServicesBySalon(id).subscribe((services: Service[]) => {
       this.services = services;
     })
 
-    this.salonService.getBarbersBySalon(id).subscribe((barbers: Barber[]) => {
+    this.barberService.getBarbersBySalon(id).subscribe((barbers: Barber[]) => {
       this.barbers = barbers;
     })
 

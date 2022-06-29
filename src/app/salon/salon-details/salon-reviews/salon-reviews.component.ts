@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { SalonService } from '../../salon.service';
-import { Review } from '../review';
+import { Review } from './review';
 import { MatDialog } from '@angular/material/dialog';
 import { AddReviewDialogComponent } from './add-review-dialog/add-review-dialog.component';
 import { DatePipe } from '@angular/common';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { AlertService } from 'src/app/alert.service';
+import { ReviewService } from './review.service';
 
 
 export interface DialogData {
@@ -40,6 +41,7 @@ export class SalonReviewsComponent implements OnInit {
   constructor(private route: ActivatedRoute,
     private salonService: SalonService,
     private jwtHelper: JwtHelperService,
+    private reviewService: ReviewService,
     private alertService: AlertService,
     public dialog: MatDialog) {
     this.mobWidth = (window.screen.width) + "px";
@@ -54,7 +56,7 @@ export class SalonReviewsComponent implements OnInit {
   
       dialogRef.afterClosed().subscribe(result => {
         if (result.rating > 0 && result.text.length >= 10) {
-          this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
+          this.reviewService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
             console.log(reviews);
             this.reviews = reviews;
           })
@@ -69,7 +71,7 @@ export class SalonReviewsComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.salonService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
+    this.reviewService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
       console.log(reviews);
     })
