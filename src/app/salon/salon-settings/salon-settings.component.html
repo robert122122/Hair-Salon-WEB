@@ -69,6 +69,39 @@
               (click)="updateSalon()">Save</button>
           </div>
         </div>
+
+        <div class="salon-address-title">
+          <h2>Salon Address</h2>
+        </div>
+
+        <div class="salon-address-container" *ngIf="mySalon.addressId != 0">
+          <div class="address-button-container">
+            <button mat-button type="button" (click)="openAddressDialog()" class="add-address-button">
+              <div class="add-address-button-content">
+                +
+              </div>
+            </button>
+          </div>
+        </div>
+        <div class="salon-details-address" *ngIf="salonAddress != null">
+          <div class="address-content">
+            <div class="address-button-text">
+              <div class="address-country">
+                {{salonAddress.country}}
+              </div>
+              <div class="address-city">
+                {{salonAddress.city}}
+              </div>
+              <div class="address-street">
+                {{salonAddress.street}}
+              </div>
+              <div class="address-number">
+                {{salonAddress.number}}
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </mat-tab>
     <mat-tab label="My Barbers">

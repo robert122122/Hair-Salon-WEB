@@ -21,7 +21,7 @@ export class SalonDescriptionComponent implements OnInit {
       country: "",
       city: "",
       street: "",
-      number: 0,
+      number: "",
     },
     rating: 0,
     description: "",

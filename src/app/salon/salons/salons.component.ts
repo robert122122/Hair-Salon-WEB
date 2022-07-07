@@ -50,7 +50,10 @@ export class SalonsComponent implements OnInit {
 
   ngOnInit(): void {
     this.salonService.getSalons().subscribe((data: Salon[]) => {
+
+      console.log(data);
       this.salons = data;
+      
       for (let i = 0; i < data.length; i++) {
         this.salonsCities.push(this.salons[i].address.city)
       }

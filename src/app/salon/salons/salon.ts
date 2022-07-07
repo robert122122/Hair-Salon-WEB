@@ -10,6 +10,18 @@ export interface Salon {
     logo: string
 }
 
+export interface SalonDTO {
+    id: number,
+    name: string,
+    email: string,
+    phoneNumber: string,
+    image:string,
+    addressId:number,
+    rating: any,
+    description: string,
+    logo: string
+}
+
 export interface SalonPost {
     name: string,
     email: string,
@@ -31,5 +43,5 @@ export interface Address {
     country: string,
     city: string,
     street: string,
-    number: number,
+    number: string,
 }

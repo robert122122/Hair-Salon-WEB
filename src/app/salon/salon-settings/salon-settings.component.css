@@ -16,6 +16,10 @@
   padding: 0.5rem;
 }
 
+.salon-address-container {
+  padding: 0.5rem;
+}
+
 :host /deep/ .mat-tab-label-container {
   border-right: 1px solid rgb(225, 225, 225) !important;
 }
@@ -88,6 +92,11 @@
   align-items: center;
 }
 
+.add-address-button {
+  height: 100%;
+  align-items: center;
+}
+
 .add-barber-button-content {
   display: flex;
   justify-content: center;
@@ -103,7 +112,28 @@
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.add-address-button-content {
+  display: flex;
+  justify-content: center;
+  font-size: 30px;
+  width: 40px !important;
+  height: 40px;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  background-color: var(--main-color);
+  align-items: center;
+  transition: 0.5s;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .add-barber-button-content:hover {
+  background-color: white;
+  outline: 2px solid var(--main-color);
+  color: var(--main-color);
+}
+
+.add-address-button-content:hover {
   background-color: white;
   outline: 2px solid var(--main-color);
   color: var(--main-color);
@@ -274,8 +304,37 @@
   padding: 0.5em;
 }
 
-.schedule-button {
+.salon-details-address {
+  display: flex;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+.salon-details-address:hover {
+  border-radius: 10px;
+  background-color: rgba(208, 204, 204, 0.544);
+}
+
+.address-content {
+  display: flex;
+  align-items: center;
   width: 80%;
+  padding: 1rem;
+}
+
+.address-button-text {
+  text-align: left;
+  margin-left: 2rem;
+  font-size: 15px;
+  color: black;
+}
+
+.address-country {
+  font-weight: 100;
+}
+
+.mat-divider {
+  border-top-color: rgba(128, 128, 128, 0.136);
 }
 
 :host /deep/ .mat-raised-button.mat-button-disabled.mat-button-disabled{

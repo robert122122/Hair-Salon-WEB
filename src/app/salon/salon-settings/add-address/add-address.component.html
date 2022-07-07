@@ -1,0 +1,69 @@
+<div class="add-address-container">
+    <div mat-dialog-content class="add-address-dialog">
+      <h1 mat-dialog-title>Add address</h1>
+      <form class="example-form">
+  
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>country</mat-label>
+          <input type="string" matInput [formControl]="countryFormControl" [(ngModel)]="addressToAdd.country"
+            (ngModelChange)="checkFormControls()" placeholder="John">
+          <mat-error
+            *ngIf="(countryFormControl.hasError('minlength') || countryFormControl.hasError('maxlength')) && !countryFormControl.hasError('required')">
+            Please enter a valid name
+          </mat-error>
+          <mat-error *ngIf="countryFormControl.hasError('required')">
+            First name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+  
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>city</mat-label>
+          <input type="string" matInput [formControl]="cityFormControl" [(ngModel)]="addressToAdd.city"
+            (ngModelChange)="checkFormControls()" placeholder="Doe">
+          <mat-error
+            *ngIf="(cityFormControl.hasError('minlength') || cityFormControl.hasError('maxlength')) && !cityFormControl.hasError('required')">
+            Please enter a valid name
+          </mat-error>
+          <mat-error *ngIf="cityFormControl.hasError('required')">
+            Last name is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+  
+        <mat-form-field class="example-full-width" appearance="fill">
+          <mat-label>street</mat-label>
+          <input type="string" matInput [formControl]="streetFormControl" [(ngModel)]="addressToAdd.street"
+            (ngModelChange)="checkFormControls()" placeholder="Ex. pat@example.com">
+          <mat-error
+            *ngIf="streetFormControl.hasError('minlength') || streetFormControl.hasError('maxlength') && !streetFormControl.hasError('required')">
+            Please enter a valid street between 14 and 99
+          </mat-error>
+          <mat-error *ngIf="streetFormControl.hasError('required')">
+            Email is <strong>required</strong>
+          </mat-error>
+        </mat-form-field>
+        <mat-divider></mat-divider>
+
+        <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>street</mat-label>
+            <input type="string" matInput [formControl]="numberFormControl" [(ngModel)]="addressToAdd.number"
+              (ngModelChange)="checkFormControls()" placeholder="Ex. pat@example.com">
+            <mat-error
+              *ngIf="numberFormControl.hasError('min') || numberFormControl.hasError('max') && !numberFormControl.hasError('required')">
+              Please enter a valid street between 14 and 99
+            </mat-error>
+            <mat-error *ngIf="streetFormControl.hasError('required')">
+              Email is <strong>required</strong>
+            </mat-error>
+          </mat-form-field>
+          <mat-divider></mat-divider>
+
+      </form>
+  
+      <div mat-dialog-actions class="caption-button">
+        <button mat-raised-button class="schedule-button" type="button" [disabled]="disabledButton"
+          [mat-dialog-close]="addressToAdd" (click)="addAddress()" cdkFocusInitial>Save</button>
+      </div>
+    </div>
+  

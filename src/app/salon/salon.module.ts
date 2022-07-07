@@ -18,6 +18,7 @@ import { AddServiceComponent } from './salon-settings/add-service/add-service.co
 import { UpdateBarberComponent } from './salon-settings/update-barber/update-barber.component';
 import { UpdateServiceComponent } from './salon-settings/update-service/update-service.component';
 import { UploadModule } from '../upload/upload.module';
+import { AddAddressComponent } from './salon-settings/add-address/add-address.component';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { UploadModule } from '../upload/upload.module';
     AddReviewDialogComponent,
     AddBarberComponent,
     AddServiceComponent,
+    AddAddressComponent,
     UpdateBarberComponent,
     UpdateServiceComponent,
 

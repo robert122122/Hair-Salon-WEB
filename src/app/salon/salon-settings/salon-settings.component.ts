@@ -2,17 +2,17 @@ import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
 import { AlertService } from 'src/app/alert.service';
 import { User } from 'src/app/login/login';
+import { AddressDTO } from '../address';
 import { BookingGet } from '../booking';
-import { Barber, BarberPost } from '../salon-details/salon-barbers/barber';
+import { Barber } from '../salon-details/salon-barbers/barber';
 import { BarberService } from '../salon-details/salon-barbers/barber.service';
-import { ReviewService } from '../salon-details/salon-reviews/review.service';
-import { Service, ServicePut } from '../salon-details/salon-services/service';
+import { Service } from '../salon-details/salon-services/service';
 import { ServiceService } from '../salon-details/salon-services/service.service';
 import { SalonService } from '../salon.service';
-import { SalonPut } from '../salons/salon';
+import { SalonDTO, SalonPut } from '../salons/salon';
+import { AddAddressComponent } from './add-address/add-address.component';
 import { AddBarberComponent } from './add-barber/add-barber.component';
 import { AddServiceComponent } from './add-service/add-service.component';
 import { UpdateBarberComponent } from './update-barber/update-barber.component';
@@ -35,13 +35,24 @@ export class SalonSettingsComponent implements OnInit {
 
   isCreate: boolean = true;
 
-  mySalon: SalonPut = {
+  mySalon: SalonDTO = {
+    id: 0,
     name: "",
     description: "",
     email: "",
     phoneNumber: "",
+    addressId: 0,
     logo: "",
-    image: ""
+    image: "",
+    rating: 0
+  }
+
+  salonAddress: AddressDTO = {
+    id: 0,
+    country: "",
+    city: "",
+    street: "",
+    number: "",
   }
 
   response!: { dbPath: ''; };
@@ -61,12 +72,12 @@ export class SalonSettingsComponent implements OnInit {
 
   pipe = new DatePipe('en-US');
 
-  disabledButton:boolean = true;
+  disabledButton: boolean = true;
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  nameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
-  phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]);
-  descriptionFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(1000)]);
+  nameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
+  phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
+  descriptionFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(1000)]);
 
   constructor(
     private salonService: SalonService,
@@ -86,18 +97,22 @@ export class SalonSettingsComponent implements OnInit {
       this.myServices = services;
     })
 
-    this.salonService.getSalon(parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
+    this.salonService.getSimpleSalon(parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
       this.mySalon.name = salon.name;
       this.mySalon.email = salon.email;
-      this.mySalon.phoneNumber = salon.phoneNumber; 
+      this.mySalon.phoneNumber = salon.phoneNumber;
       this.mySalon.description = salon.description;
+      if (salon.addressId != null) {
+        this.salonService.getAddress(salon.addressId).subscribe((address) => {
+          this.salonAddress = address;
+        })
+      }
     })
 
     this.salonService.getBookingsBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((bookings) => {
       this.myBookings = bookings;
       this.dataSource = this.myBookings;
     })
-
   }
 
   openBarberDialog(): void {
@@ -160,6 +175,21 @@ export class SalonSettingsComponent implements OnInit {
     });
   }
 
+  openAddressDialog(): void {
+    let addressDialogRef = this.dialog.open(AddAddressComponent, {
+      width: "50%",
+      data: { salonId: parseInt(localStorage.getItem('userId')!) },
+    });
+
+    addressDialogRef.afterClosed().subscribe(result => {
+      if (result != undefined) {
+        this.serviceService.getServicesBySalon(parseInt(localStorage.getItem('userId')!)).subscribe((services: Service[]) => {
+          this.myServices = services;
+        })
+      }
+    });
+  }
+
   deleteBarber(barberId: number) {
 
     this.barberService.deleteBarber(barberId).subscribe(() => {
@@ -187,7 +217,7 @@ export class SalonSettingsComponent implements OnInit {
   }
 
   updateSalon() {
-    if(this.response!=undefined){
+    if (this.response != undefined) {
       this.mySalon.image = this.response.dbPath;
     }
     console.log(this.mySalon);
@@ -202,12 +232,12 @@ export class SalonSettingsComponent implements OnInit {
     this.isCreate = true;
   }
 
-  uploadFinished = (event:any) => { 
-    this.response = event; 
+  uploadFinished = (event: any) => {
+    this.response = event;
     this.checkFormControls();
   }
 
-  
+
   checkFormControls(): void {
 
     if (this.emailFormControl.errors != null || this.nameFormControl.errors != null || this.phonenumberFormControl.errors != null || this.descriptionFormControl.errors != null) {
