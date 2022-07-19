@@ -9,7 +9,7 @@
           <form class="example-form">
 
             <mat-form-field class="example-full-width" appearance="fill">
-              <mat-label>FirstName</mat-label>
+              <mat-label>Name</mat-label>
               <input type="string" matInput [formControl]="nameFormControl" [(ngModel)]="mySalon.name"
                 (ngModelChange)="checkFormControls()" placeholder="John">
               <mat-error
@@ -27,7 +27,7 @@
               <input type="string" matInput [formControl]="descriptionFormControl" [(ngModel)]="mySalon.description"
                 (ngModelChange)="checkFormControls()" placeholder="John">
               <mat-error
-                *ngIf="(nameFormControl.hasError('minlength') || nameFormControl.hasError('maxlength')) && !nameFormControl.hasError('required')">
+                *ngIf="(descriptionFormControl.hasError('minlength') || descriptionFormControl.hasError('maxlength')) && !descriptionFormControl.hasError('required')">
                 Please enter a valid description
               </mat-error>
               <mat-error *ngIf="nameFormControl.hasError('required')">

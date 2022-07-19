@@ -34,7 +34,8 @@ export interface SalonPut {
     description: string,
     email: string,
     phoneNumber: string,
-    image: string
+    image: string,
+    logo: string
 }
 
 export interface Address {

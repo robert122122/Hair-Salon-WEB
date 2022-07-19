@@ -1,5 +1,5 @@
 <div class="user-settings-main-container">
-  <div class="user-photo">
+  <div class="user-photo" *ngIf="user.image != null && user.image">
     <img [src]="createImgPath(user.image)" alt="profile picture" style="width:60px; height:60px;">
   </div>
 

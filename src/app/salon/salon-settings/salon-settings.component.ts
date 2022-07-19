@@ -61,6 +61,7 @@ export class SalonSettingsComponent implements OnInit {
     email: "",
     image: "",
     phoneNumber: "",
+    logo: ""
   }
 
   response!: { dbPath: ''; };
@@ -113,6 +114,7 @@ export class SalonSettingsComponent implements OnInit {
       this.salonPut.phoneNumber = salon.phoneNumber;
       this.salonPut.description = salon.description;
       this.salonPut.image = salon.image;
+      this.salonPut.logo = salon.logo;
 
       if (salon.addressId != null) {
         this.salonService.getAddress(salon.addressId).subscribe((address) => {
@@ -232,7 +234,8 @@ export class SalonSettingsComponent implements OnInit {
     if (this.response != undefined) {
       this.salonPut.image = this.response.dbPath;
     }
-    this.salonService.updateSalon(this.salonPut, parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
+    console.log(this.salonPut);
+    this.salonService.updateSalon(parseInt(localStorage.getItem('userId')!), this.salonPut).subscribe((salon) => {
       
       this.mySalon = salon;
       this.alertService.alertSuccess("Salon updated successfully");

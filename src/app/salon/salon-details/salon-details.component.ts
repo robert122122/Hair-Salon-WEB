@@ -184,6 +184,8 @@ export class SalonDetailsComponent implements OnInit {
   }
 
   public createImgPath = (serverPath: string): string => {
+    console.log(this.salon);
+    console.log(this.salon.logo);
     this.imgPath = `https://localhost:44396/${serverPath}`;
     this.imgPath = this.imgPath.replace("\\", "/");
     this.imgPath = this.imgPath.replace("\\", "/");
