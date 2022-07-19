@@ -234,9 +234,8 @@ export class SalonSettingsComponent implements OnInit {
     if (this.response != undefined) {
       this.salonPut.image = this.response.dbPath;
     }
-    console.log(this.salonPut);
+
     this.salonService.updateSalon(parseInt(localStorage.getItem('userId')!), this.salonPut).subscribe((salon) => {
-      
       this.mySalon = salon;
       this.alertService.alertSuccess("Salon updated successfully");
       this.isCreate = false;

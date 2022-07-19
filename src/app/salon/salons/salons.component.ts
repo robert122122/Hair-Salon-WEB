@@ -75,17 +75,19 @@ export class SalonsComponent implements OnInit {
   }
 
   searchSalon(): any {
+    this.isSearch = false;
+
     if (this.value.length > 0) {
       this.isSearch = false;
       this.searchedSalons = [];
-      console.log(this.value);
+
       this.salons.map((salon: any) => {
         if ((salon.name.toLowerCase()).includes(this.value.toLowerCase())) {
           this.isSearch = true;
           this.searchedSalons.push(salon);
         }
       })
-      console.log(this.isSearch);
+
       if (this.isSearch == false) {
         this.alertService.alertWarning("Salon not found");
       }
@@ -95,7 +97,6 @@ export class SalonsComponent implements OnInit {
 
   handleSelectedCity(city: string): any {
     var x = this.selectedCities.findIndex(y => y === city);
-    console.log("aa");
 
     if (x == -1) {
       this.selectedCities.push(city);
@@ -103,7 +104,6 @@ export class SalonsComponent implements OnInit {
     else {
       this.selectedCities.splice(x, 1);
     }
-
     this.applyFilters();
   }
 

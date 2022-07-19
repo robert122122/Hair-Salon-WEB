@@ -32,23 +32,22 @@ export class UpdateBarberComponent implements OnInit {
     private salonService: SalonService,
     private barberService: BarberService,
     public dialogRef: MatDialogRef<UpdateBarberComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UpdateBarberDialogData, 
+    @Inject(MAT_DIALOG_DATA) public data: UpdateBarberDialogData,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
 
     this.barberUpdated = {
       firstName: this.data.barber.firstName,
-      lastName:this.data.barber.lastName,
-      age:this.data.barber.age,
-      image:this.data.barber.image
+      lastName: this.data.barber.lastName,
+      age: this.data.barber.age,
+      image: this.data.barber.image
     }
   }
 
   addBarber() {
     if (this.checkFormControls() == false) {
       this.barberService.updateBarber(this.barberUpdated, this.data.barber.id).subscribe((barber) => {
-        console.log(barber);
       })
     }
     else this.alertService.alertError("");

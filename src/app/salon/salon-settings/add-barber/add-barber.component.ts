@@ -37,7 +37,7 @@ export class AddBarberComponent implements OnInit {
     private salonService: SalonService,
     private barberService: BarberService,
     public dialogRef: MatDialogRef<AddBarberComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
@@ -47,13 +47,13 @@ export class AddBarberComponent implements OnInit {
     this.barberToAdd.salonId = this.data.salonId;
   }
 
-  uploadFinished = (event:any) => { 
-    this.response = event; 
+  uploadFinished = (event: any) => {
+    this.response = event;
     this.checkFormControls();
   }
 
-  public createImgPath = (serverPath: string) => { 
-    return `https://localhost:44396/${serverPath}`; 
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44396/${serverPath}`;
   }
 
   addBarber() {

@@ -28,27 +28,26 @@ export class UpdateServiceComponent implements OnInit {
   costFormControl = new FormControl('', [Validators.required, Validators.min(0), Validators.max(1000)]);
   serviceTimeFormControl = new FormControl('', [Validators.required, Validators.min(10), Validators.max(180)]);
 
-  constructor(    
+  constructor(
     public dialogRef: MatDialogRef<UpdateServiceComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: UpdateServiceDialogData, 
-    private salonService: SalonService, 
+    @Inject(MAT_DIALOG_DATA) public data: UpdateServiceDialogData,
+    private salonService: SalonService,
     private serviceService: ServiceService,
     private alertService: AlertService) { }
 
   ngOnInit(): void {
 
-      this.serviceUpdated = {
-        serviceName: this.data.service.serviceName,
-        description:this.data.service.description,
-        cost:this.data.service.cost,
-        serviceTime:this.data.service.serviceTime
-      }
+    this.serviceUpdated = {
+      serviceName: this.data.service.serviceName,
+      description: this.data.service.description,
+      cost: this.data.service.cost,
+      serviceTime: this.data.service.serviceTime
+    }
   }
 
   updateService() {
     if (this.checkFormControls() == false) {
       this.serviceService.updateService(this.serviceUpdated, this.data.service.id).subscribe((service) => {
-        console.log(service);
       })
     }
     else this.alertService.alertError("");

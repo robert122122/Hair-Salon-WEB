@@ -31,7 +31,7 @@ export class AddServiceComponent implements OnInit {
 
   constructor(
     public dialogRef: MatDialogRef<AddServiceComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, 
+    @Inject(MAT_DIALOG_DATA) public data: DialogData,
     private salonService: SalonService,
     private serviceService: ServiceService,
     private alertService: AlertService) { }
@@ -44,7 +44,6 @@ export class AddServiceComponent implements OnInit {
   addService() {
     if (this.checkFormControls() == false) {
       this.serviceService.addService(this.serviceToAdd).subscribe((service) => {
-        console.log(service);
       })
     }
     else this.alertService.alertError("");

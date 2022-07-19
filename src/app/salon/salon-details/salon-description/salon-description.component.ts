@@ -28,15 +28,14 @@ export class SalonDescriptionComponent implements OnInit {
     logo: ""
   };
 
-  constructor(    private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
     private salonService: SalonService,) { }
 
   ngOnInit(): void {
 
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
-    
+
     this.salonService.getSalon(id).subscribe((salon: Salon) => {
-      console.log(salon.description);
       this.salon = salon;
     })
   }

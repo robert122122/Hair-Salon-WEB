@@ -47,10 +47,8 @@ export class AddAddressComponent implements OnInit {
 
   addAddress() {
     if (this.checkFormControls() == false) {
-      console.log(this.addressToAdd);
       this.salonService.addAddress(this.addressToAdd).subscribe({
         next: (response) => {
-          console.log(response);
           this.salonService.updateSalonAddress(response.id, this.salonId, null).subscribe((salon) => {
             this.alertService.alertSuccess("Salon updated");
           });
@@ -58,7 +56,6 @@ export class AddAddressComponent implements OnInit {
           this.isCreate = false;
         },
         error: (err: HttpErrorResponse) => {
-          console.log(err);
           this.alertService.alertError("okokokokok");
         }
       })

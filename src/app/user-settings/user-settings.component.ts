@@ -21,7 +21,7 @@ export class UserSettingsComponent implements OnInit {
   user: User = {
     firstName: '',
     lastName: '',
-    phoneNumber:'',
+    phoneNumber: '',
     email: '',
     image: '',
   };
@@ -29,38 +29,37 @@ export class UserSettingsComponent implements OnInit {
   response!: { dbPath: ''; };
 
   emailFormControl = new FormControl('', [Validators.required, Validators.email]);
-  firstnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
-  lastnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3),Validators.maxLength(10)]);
-  phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10),Validators.maxLength(10)]);
+  firstnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
+  lastnameFormControl = new FormControl('', [Validators.required, Validators.minLength(3), Validators.maxLength(10)]);
+  phonenumberFormControl = new FormControl('', [Validators.required, Validators.minLength(10), Validators.maxLength(10)]);
 
   disabledButton: boolean = true;
 
-  bookings: BookingGet [] = [];
+  bookings: BookingGet[] = [];
 
   pipe = new DatePipe('en-US');
 
-  constructor(private salonService: SalonService, private userService: UserService,private httpService: HttpClient, private alertService: AlertService, private jwtHelper: JwtHelperService) { }
+  constructor(private salonService: SalonService, private userService: UserService, private httpService: HttpClient, private alertService: AlertService, private jwtHelper: JwtHelperService) { }
 
   ngOnInit(): void {
     this.isCreate = true;
 
-    this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) =>{
+    this.salonService.getBookingsByUserWithDetails(parseInt(localStorage.getItem('userId')!)).subscribe((bookings: BookingGet[]) => {
       this.bookings = bookings;
       this.dataSource = this.bookings;
     })
 
     this.userService.getUserDetails().subscribe((user: User) => {
       this.user = user;
-      console.log(user);
     })
-    
+
   }
 
   updateUser() {
-    if(this.response!=undefined) {
+    if (this.response != undefined) {
       this.user.image = this.response.dbPath;
     }
-    
+
     this.userService.updateUser(this.user).subscribe({
       next: _ => {
         this.alertService.alertSuccess("User updated succesfully!");
@@ -74,23 +73,21 @@ export class UserSettingsComponent implements OnInit {
     this.isCreate = true;
   }
 
-  uploadFinished = (event:any) => { 
-    this.response = event; 
+  uploadFinished = (event: any) => {
+    this.response = event;
     this.checkFormControls();
   }
 
-  public createImgPath = (serverPath: string) => { 
-    return `https://localhost:44396/${serverPath}`; 
+  public createImgPath = (serverPath: string) => {
+    return `https://localhost:44396/${serverPath}`;
   }
 
   checkFormControls(): void {
 
-    if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null ) {
+    if (this.emailFormControl.errors != null || this.firstnameFormControl.errors != null || this.lastnameFormControl.errors != null || this.phonenumberFormControl.errors != null) {
       this.disabledButton = true;
-      console.log(true);
       return;
     }
-    console.log(false);
     this.disabledButton = false;
   }
 

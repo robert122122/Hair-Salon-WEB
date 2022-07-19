@@ -48,22 +48,21 @@ export class SalonReviewsComponent implements OnInit {
   }
 
   openDialog(): void {
-    if(this.userRole == 'User'){
+    if (this.userRole == 'User') {
       let dialogRef = this.dialog.open(AddReviewDialogComponent, {
         width: this.mobWidth,
         data: { salonId: this.salonId },
       });
-  
+
       dialogRef.afterClosed().subscribe(result => {
         if (result.rating > 0 && result.text.length >= 10) {
           this.reviewService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
-            console.log(reviews);
             this.reviews = reviews;
           })
         }
       });
     }
-    else if (this.userRole == 'Salon'){
+    else if (this.userRole == 'Salon') {
       this.alertService.alertWarning("You need to login as a user!");
     }
 
@@ -73,7 +72,6 @@ export class SalonReviewsComponent implements OnInit {
 
     this.reviewService.getReviewsBySalon(this.salonId).subscribe((reviews: Review[]) => {
       this.reviews = reviews;
-      console.log(reviews);
     })
 
     const token = localStorage.getItem("jwt");
