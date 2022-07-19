@@ -40,8 +40,8 @@ export class SalonService {
     return this.httpService.get<BookingGet[]>(`https://localhost:44396/api/Booking/User/${userId}`);
   }
 
-  updateSalon(salon: SalonPut, salonId: number): Observable<Salon> {
-    return this.httpService.put<Salon>(`https://localhost:44396/api/Salon/${salonId}`, salon);
+  updateSalon(salon: SalonPut, salonId: number): Observable<SalonDTO> {
+    return this.httpService.put<SalonDTO>(`https://localhost:44396/api/Salon/${salonId}`, salon);
   }
 
   addAddress(address:AddressPost): Observable<AddressDTO> {

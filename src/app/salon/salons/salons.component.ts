@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { AlertService } from 'src/app/alert.service';
 import { SalonService } from '../salon.service';
 import { Salon } from './salon';
 
@@ -11,12 +12,18 @@ import { Salon } from './salon';
 })
 export class SalonsComponent implements OnInit {
 
-  constructor(private salonService: SalonService) { }
+  constructor(
+    private salonService: SalonService,
+    private alertService: AlertService,
+  ) { }
 
+  imgPath: string = "";
 
   ratingNumbers: number[] = [1, 2, 3, 4, 5];
 
   selectedRatings: number[] = [];
+
+  filtersApplied: boolean = false;
 
   panelOpenState = false;
 
@@ -46,14 +53,16 @@ export class SalonsComponent implements OnInit {
 
   salons: Salon[] = [];
 
+  filteredSalons: Salon[] = [];
+
+
   searchedSalons: Salon[] = [];
 
   ngOnInit(): void {
     this.salonService.getSalons().subscribe((data: Salon[]) => {
 
-      console.log(data);
       this.salons = data;
-      
+
       for (let i = 0; i < data.length; i++) {
         this.salonsCities.push(this.salons[i].address.city)
       }
@@ -66,33 +75,43 @@ export class SalonsComponent implements OnInit {
   }
 
   searchSalon(): any {
-    this.searchedSalons = [];
-    this.salons.map((salon: any) => {
-      if ((salon.name.toLowerCase()).includes(this.value.toLowerCase())) {
-        this.searchedSalons.push(salon);
+    if (this.value.length > 0) {
+      this.isSearch = false;
+      this.searchedSalons = [];
+      console.log(this.value);
+      this.salons.map((salon: any) => {
+        if ((salon.name.toLowerCase()).includes(this.value.toLowerCase())) {
+          this.isSearch = true;
+          this.searchedSalons.push(salon);
+        }
+      })
+      console.log(this.isSearch);
+      if (this.isSearch == false) {
+        this.alertService.alertWarning("Salon not found");
       }
-    })
-    this.isSearch = true;
-    console.log(this.searchedSalons);
+    }
+
   }
 
   handleSelectedCity(city: string): any {
     var x = this.selectedCities.findIndex(y => y === city);
-    console.log(x);
-    console.log(this.selectedCities.findIndex(y => y === city));
+    console.log("aa");
 
     if (x == -1) {
       this.selectedCities.push(city);
-      console.log(this.selectedCities);
     }
     else {
       this.selectedCities.splice(x, 1);
-      console.log(this.selectedCities);
     }
+
+    this.applyFilters();
   }
 
-  public createImgPath = (serverPath: string) => {
-    return `https://localhost:44396/${serverPath}`;
+  public createImgPath = (serverPath: string): string => {
+    this.imgPath = `https://localhost:44396/${serverPath}`;
+    this.imgPath = this.imgPath.replace("\\", "/");
+    this.imgPath = this.imgPath.replace("\\", "/");
+    return this.imgPath;
   }
 
   checkImage(image: string) {
@@ -104,17 +123,15 @@ export class SalonsComponent implements OnInit {
 
   handleSelectedRating(rating: number): any {
     var x = this.selectedRatings.findIndex(y => y === rating);
-    console.log(x);
-    console.log(this.selectedRatings.findIndex(y => y === rating));
 
     if (x == -1) {
       this.selectedRatings.push(rating);
-      console.log(this.selectedRatings);
     }
     else {
       this.selectedRatings.splice(x, 1);
-      console.log(this.selectedRatings);
     }
+
+    this.applyFilters();
   }
 
   sortSalons(option: string): any {
@@ -174,4 +191,43 @@ export class SalonsComponent implements OnInit {
     })
 
   }
+
+  applyFilters() {
+    this.filtersApplied = false;
+    this.filteredSalons = [];
+    this.salons.map((salon) => {
+      if (this.selectedCities.length > 0) {
+        this.selectedCities.map((city) => {
+          if (salon.address.city == city) {
+            if (this.selectedRatings.length > 0) {
+              this.selectedRatings.map((rating) => {
+                if (salon.rating >= rating) {
+                  this.filtersApplied = true;
+                  this.filteredSalons.push(salon);
+                }
+              })
+            }
+            else {
+              this.filtersApplied = true;
+              this.filteredSalons.push(salon);
+            }
+          }
+        })
+      }
+
+      else if (this.selectedRatings.length > 0) {
+        this.selectedRatings.map((rating) => {
+          if (salon.rating >= rating) {
+            this.filteredSalons.push(salon);
+            this.filtersApplied = true;
+          }
+        })
+      }
+    })
+
+    if (this.filtersApplied == false && this.selectedRatings.length != 0 && this.selectedCities.length != 0) {
+      this.alertService.alertWarning("0 salons found with these filters");
+    }
+  }
+
 }

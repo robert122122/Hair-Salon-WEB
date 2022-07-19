@@ -55,6 +55,14 @@ export class SalonSettingsComponent implements OnInit {
     number: "",
   }
 
+  salonPut: SalonPut = {
+    name: "",
+    description: "",
+    email: "",
+    image: "",
+    phoneNumber: "",
+  }
+
   response!: { dbPath: ''; };
 
 
@@ -98,10 +106,14 @@ export class SalonSettingsComponent implements OnInit {
     })
 
     this.salonService.getSimpleSalon(parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
-      this.mySalon.name = salon.name;
-      this.mySalon.email = salon.email;
-      this.mySalon.phoneNumber = salon.phoneNumber;
-      this.mySalon.description = salon.description;
+      this.mySalon = salon;
+
+      this.salonPut.name = salon.name;
+      this.salonPut.email = salon.email;
+      this.salonPut.phoneNumber = salon.phoneNumber;
+      this.salonPut.description = salon.description;
+      this.salonPut.image = salon.image;
+
       if (salon.addressId != null) {
         this.salonService.getAddress(salon.addressId).subscribe((address) => {
           this.salonAddress = address;
@@ -218,10 +230,11 @@ export class SalonSettingsComponent implements OnInit {
 
   updateSalon() {
     if (this.response != undefined) {
-      this.mySalon.image = this.response.dbPath;
+      this.salonPut.image = this.response.dbPath;
     }
-    console.log(this.mySalon);
-    this.salonService.updateSalon(this.mySalon, parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
+    this.salonService.updateSalon(this.salonPut, parseInt(localStorage.getItem('userId')!)).subscribe((salon) => {
+      
+      this.mySalon = salon;
       this.alertService.alertSuccess("Salon updated successfully");
       this.isCreate = false;
 

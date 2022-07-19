@@ -36,6 +36,7 @@ export class SalonDescriptionComponent implements OnInit {
     const id = parseInt(this.route.snapshot.paramMap.get('id')!, 10);
     
     this.salonService.getSalon(id).subscribe((salon: Salon) => {
+      console.log(salon.description);
       this.salon = salon;
     })
   }

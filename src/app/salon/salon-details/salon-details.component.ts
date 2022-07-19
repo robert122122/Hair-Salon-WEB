@@ -119,6 +119,9 @@ export class SalonDetailsComponent implements OnInit {
 
   stepperOrientation: Observable<StepperOrientation>;
 
+  imgPath: string = "";
+
+
   selected: Date | null = null;
 
   ngOnInit(): void {
@@ -180,6 +183,13 @@ export class SalonDetailsComponent implements OnInit {
 
   }
 
+  public createImgPath = (serverPath: string): string => {
+    this.imgPath = `https://localhost:44396/${serverPath}`;
+    this.imgPath = this.imgPath.replace("\\", "/");
+    this.imgPath = this.imgPath.replace("\\", "/");
+    return this.imgPath;
+  }
+
   setServiceId(id: number): void {
     this.booking.serviceId = id;
     this.serviceCompleted = true;
@@ -213,6 +223,8 @@ export class SalonDetailsComponent implements OnInit {
 
     this.alertService.alertSuccess("Appointment success!");
   }
+
+
 
   resetStepper(): void {
     this.serviceCompleted = false;

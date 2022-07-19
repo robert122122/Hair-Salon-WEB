@@ -35,9 +35,14 @@
 }
 
 .salon-details-photo {
-  width: 80%;
-  height: 220px;
+
   display: flex;
+  height: 220px;
+  width: 80%;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  justify-content: center;
 }
 
 .salon-details-image {

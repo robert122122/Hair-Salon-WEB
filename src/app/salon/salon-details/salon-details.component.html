@@ -31,8 +31,8 @@
       <div class="salon-details-content-container">
         <div class="salon-details-content">
           <div class="salon-details-content-header">
-            <div class="salon-details-photo">
-              <img src={{salon.logo}} class="salon-details-image" alt="">
+            <div class="salon-details-photo" [style.backgroundImage]="'url('+ createImgPath(salon.logo) +')'" *ngIf="salon.logo !== ''">
+
             </div>
             <div class="salon-details-name">
               {{salon.name}}

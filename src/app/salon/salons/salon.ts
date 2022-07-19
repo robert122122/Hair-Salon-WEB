@@ -34,7 +34,6 @@ export interface SalonPut {
     description: string,
     email: string,
     phoneNumber: string,
-    logo: string,
     image: string
 }
 
